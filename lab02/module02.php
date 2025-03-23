@@ -26,7 +26,7 @@
     <?php
     $marks = array(85, 85, 95); // declare and initialise array
     $marks[1] = 90; // modify second element
-    $ave = ($marks[0] + $marks[1] + $marks[2]) / 3; // compute average
+    $ave = ($marks[0] + $marks[1] + $marks[2]) / count($marks); // compute average
     ($ave >= 50) // checks status
         ? $status = "PASSED"
         : $status = "FAILED";
