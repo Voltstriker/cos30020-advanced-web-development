@@ -15,6 +15,8 @@
         <h1>Web Programming - Lab 3</h1>
         <ul>
             <li><a class="active" href="index.php">Home</a></li>
+            <li><a href="factorial.php">Task 1</a></li>
+            <li><a href="factorialform.php">Task 1: Form</a></li>
         </ul>
         <h4>Jayden Earles (100684019)</h4>
     </div>
