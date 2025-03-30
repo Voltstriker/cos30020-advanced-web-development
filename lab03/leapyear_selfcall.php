@@ -25,7 +25,7 @@
         </ul>
         <h4>Jayden Earles (100684019)</h4>
     </div>
-    <h2>Functions and Control Structures</h2>
+    <h2>Task 2: Extra Challenge</h2>
     <form action="leapyear_selfcall.php" method="get">
         <label for="year">Enter a year:</label>
         <input type="text" id="year" name="year" min="0" required>

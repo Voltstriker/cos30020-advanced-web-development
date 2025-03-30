@@ -25,7 +25,7 @@
         </ul>
         <h4>Jayden Earles (100684019)</h4>
     </div>
-    <h2>Functions and Control Structures</h2>
+    <h2>Task 3: Implementing loop statements</h2>
     <?php
     function is_prime($num)
     {

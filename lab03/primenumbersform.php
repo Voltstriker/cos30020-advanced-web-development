@@ -29,7 +29,7 @@
         </ul>
         <h4>Jayden Earles (100684019)</h4>
     </div>
-    <h2>Task 2: Using if statement</h2>
+    <h2>Task 3: Implementing loop statements</h2>
     <form action="primenumbers.php" method="get">
         <label for="number">Enter a number:</label>
         <input type="text" id="number" name="number" min="0" required>

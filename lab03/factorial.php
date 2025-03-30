@@ -29,7 +29,7 @@
         </ul>
         <h4>Jayden Earles (100684019)</h4>
     </div>
-    <h2>Using if and while statements</h2>
+    <h2>Task 1: Using if and while statements</h2>
     <?php
     if (isset($_GET['number'])) {                                           // check if form data exists
         $num = $_GET['number'];                                             // obtain the form data
