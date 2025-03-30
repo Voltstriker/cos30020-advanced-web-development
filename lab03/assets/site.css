@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0px 15px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 20px 0;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0 0 0;
+}
+
+#header > ul {
+    list-style: none;
+}
+
+#header > ul > li {
+    padding: 5px;
+    margin: 15px;
+    float: left;
+    font-weight: bold;
+}
+
+#header > ul > li > a {
+    text-decoration: none;
+    color: #0000EE;
+}
+
+#header > ul > li > a.active {
+    text-decoration: underline;
+}
+
+#header > ul > li > a:hover {
+    text-decoration: underline;
+}
+
+a, a:visited {
+    color: #0000EE;
+}
