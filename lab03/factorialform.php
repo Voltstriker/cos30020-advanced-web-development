@@ -21,6 +21,8 @@
             <li><a href="index.php">Home</a></li>
             <li><a href="factorial.php">Task 1</a></li>
             <li><a class="active" href="factorialform.php">Task 1: Form</a></li>
+            <li><a href="leapyear.php">Task 2</a></li>
+            <li><a href="leapyearform.php">Task 2: Form</a></li>
         </ul>
         <h4>Jayden Earles (100684019)</h4>
     </div>

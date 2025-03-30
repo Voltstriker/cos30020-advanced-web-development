@@ -21,6 +21,8 @@
             <li><a href="index.php">Home</a></li>
             <li><a class="active" href="factorial.php">Task 1</a></li>
             <li><a href="factorialform.php">Task 1: Form</a></li>
+            <li><a href="leapyear.php">Task 2</a></li>
+            <li><a href="leapyearform.php">Task 2: Form</a></li>
         </ul>
         <h4>Jayden Earles (100684019)</h4>
     </div>
@@ -28,7 +30,7 @@
     <?php
     if (isset($_GET['number'])) {                                           // check if form data exists
         $num = $_GET['number'];                                             // obtain the form data
-        if (is_numeric($num)) {                                             // check if $num is a positive number
+        if (is_numeric($num) && $num >= 0) {                                // check if $num is a positive number
             if ($num == round($num)) {                                      // check if $num is an integer
                 echo "<p>", $num, "! is ", factorial($num), ".</p>";
             } else {                                                        // number is not an integer
