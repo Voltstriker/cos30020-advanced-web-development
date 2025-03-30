@@ -28,7 +28,7 @@
     <?php
     function is_prime($num)
     {
-        for ($i = 2; $i <= $num; $i++) {                                        // loop from 2 to the value of $num
+        for ($i = 2; $i < $num; $i++) {                                        // loop from 2 to the value of $num
             if ($num % $i == 0) {                                               // check if $num is divisible by $i
                 return false;                                                   // not prime
             }
