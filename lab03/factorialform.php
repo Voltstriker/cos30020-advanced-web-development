@@ -24,7 +24,7 @@
         </ul>
         <h4>Jayden Earles (100684019)</h4>
     </div>
-    <h2>Using if and while statements</h2>
+    <h2>Task 1: Using if and while statements</h2>
     <form action="factorial.php" method="get">
         <label for="number">Enter a number:</label>
         <input type="number" id="number" name="number" min="0" required>
