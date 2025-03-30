@@ -24,11 +24,16 @@
     </div>
     <h2>Functions and Control Structures</h2>
     <?php
+    function is_leapyear($year)
+    {
+        return $year % 4 == 0 && ($year % 100 != 0 || $year % 400 == 0);
+    }
+
     if (isset($_GET['year'])) {                                                 // check if form data exists
         $year = $_GET['year'];                                                  // obtain the form data
-        if (is_numeric($year) && $year >= 0) {                                                // check if $year is a positive number
+        if (is_numeric($year) && $year >= 0) {                                  // check if $year is a positive number
             if ($year == round($year)) {                                        // check if $year is an integer
-                if ($year % 4 == 0 && ($year % 100 != 0 || $year % 400 == 0)) { // check if $year is a leap year
+                if (is_leapyear($year)) {                                       // check if $year is a leap year
                     echo "<p>", $year, " is a leap year.</p>";
                 } else {
                     echo "<p>", $year, " is not a leap year.</p>";
