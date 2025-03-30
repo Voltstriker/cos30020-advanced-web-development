@@ -29,7 +29,7 @@
     <h2>Task 1: Using if and while statements</h2>
     <form action="factorial.php" method="get">
         <label for="number">Enter a number:</label>
-        <input type="number" id="number" name="number" min="0" required>
+        <input type="text" id="number" name="number" min="0" required>
         <input type="submit" value="Calculate Factorial">
         <input type="reset" value="Reset">
     </form>
