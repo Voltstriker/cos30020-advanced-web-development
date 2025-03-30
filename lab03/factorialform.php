@@ -25,7 +25,7 @@
         <h4>Jayden Earles (100684019)</h4>
     </div>
     <h2>Using if and while statements</h2>
-    <form action="factorial.php" method="post">
+    <form action="factorial.php" method="get">
         <label for="number">Enter a number:</label>
         <input type="number" id="number" name="number" min="0" required>
         <input type="submit" value="Calculate Factorial">

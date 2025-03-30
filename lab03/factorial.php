@@ -26,8 +26,8 @@
     </div>
     <h2>Using if and while statements</h2>
     <?php
-    if (isset($_POST['number'])) {                                           // check if form data exists
-        $num = $_POST['number'];                                             // obtain the form data
+    if (isset($_GET['number'])) {                                           // check if form data exists
+        $num = $_GET['number'];                                             // obtain the form data
         if (is_numeric($num)) {                                             // check if $num is a positive number
             if ($num == round($num)) {                                      // check if $num is an integer
                 echo "<p>", $num, "! is ", factorial($num), ".</p>";
