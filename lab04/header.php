@@ -8,6 +8,8 @@ echo '
         <li><a id="strform" href="strform.php">Task 1: Form</a></li>
         <li><a id="perfectpalindrome" href="perfectpalindrome.php">Task 2</a></li>
         <li><a id="perfectpalindromeform" href="perfectpalindromeform.php">Task 2: Form</a></li>
+        <li><a id="standardpalindrome" href="standardpalindrome.php">Task 3</a></li>
+        <li><a id="standardpalindromeform" href="standardpalindromeform.php">Task 3: Form</a></li>
     </ul>
     <h4>Jayden Earles (100684019)</h4>
 </div>
