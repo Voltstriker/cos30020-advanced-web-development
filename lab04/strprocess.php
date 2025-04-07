@@ -32,22 +32,22 @@
             if (preg_match($vowels, $str1)) {
                 // remove vowels from $str1 and display the new string
                 $str1_no_vowels = preg_replace($vowels, "", $str1);
-                echo "<p>Original string: $str1</p>";
-                echo "<p>String after removing vowels: $str1_no_vowels</p>";
+                echo "<p class=\"text-warning\">Original string: $str1</p>";
+                echo "<p class=\"text-success\">String after removing vowels: $str1_no_vowels</p>";
             }
             // str1 does not contain any vowels
             else {
-                echo "<p>The string does not contain any vowels.</p>";
+                echo "<p class=\"text-failure\">The string does not contain any vowels.</p>";
             }
         }
         // string contains invalid characters
         else {
-            echo "<p>Please enter a string containing only letters or space.</p>";
+            echo "<p class=\"text-warning\">Please enter a string containing only letters or space.</p>";
         }
     }
     // str1 is not set in the form data
     else {
-        echo "<p>Please enter a string from the input form.</p>";
+        echo "<p class=\"text-warning\">Please enter a string from the input form.</p>";
     }
     ?>
     <script src="assets/site.js"></script>

@@ -32,14 +32,14 @@
         // check if str1 is a palindrome
         // a palindrome is a string that reads the same forwards and backwards
         if (strcmp($str1_cleansed, strrev($str1_cleansed)) == 0) {
-            echo "<p>The string <strong>'$str1'</strong> is a palindrome.</p>";
+            echo "<p class=\"text-success\">The string <strong>'$str1'</strong> is a palindrome.</p>";
         } else {
-            echo "<p>The string <strong>'$str1'</strong> is not a palindrome.</p>";
+            echo "<p class=\"text-failure\">The string <strong>'$str1'</strong> is not a palindrome.</p>";
         }
     }
     // str1 is not set in the form data
     else {
-        echo "<p>Please enter a string from the input form.</p>";
+        echo "<p class=\"text-warning\">Please enter a string from the input form.</p>";
     }
     ?>
     <script src="assets/site.js"></script>

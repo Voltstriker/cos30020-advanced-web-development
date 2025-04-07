@@ -43,3 +43,15 @@ h1, h2, h3, h4, h5, h6 {
 a, a:visited {
     color: #0000EE;
 }
+
+.text-success {
+    color: #28a745;
+}
+
+.text-failure {
+    color: #dc3545;
+}
+
+.text-warning {
+    color: #ffc107;
+}
