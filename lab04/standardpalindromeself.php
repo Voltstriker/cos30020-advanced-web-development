@@ -75,6 +75,15 @@
         echo "<p class=\"text-warning\">Please enter a string from the input form.</p>";
     }
     ?>
+    <form action="standardpalindromeself.php" method="post">
+        <fieldset>
+            <legend>String Manipulation</legend>
+            <label for="str1">Enter a string:</label><br />
+            <input type="text" id="str1" name="str1" required /><br /><br />
+            <input type="submit" value="Submit" />
+            <input type="reset" value="Reset" />
+        </fieldset>
+    </form>
     <script src="assets/site.js"></script>
 </body>
 

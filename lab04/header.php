@@ -10,6 +10,7 @@ echo '
         <li><a id="perfectpalindromeform" href="perfectpalindromeform.php">Task 2: Form</a></li>
         <li><a id="standardpalindrome" href="standardpalindrome.php">Task 3</a></li>
         <li><a id="standardpalindromeform" href="standardpalindromeform.php">Task 3: Form</a></li>
+        <li><a id="standardpalindromeself" href="standardpalindromeself.php">Task 3: Extra Challenge</a></li>
     </ul>
     <h4>Jayden Earles (100684019)</h4>
 </div>
