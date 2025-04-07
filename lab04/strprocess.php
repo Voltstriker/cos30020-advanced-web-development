@@ -47,7 +47,7 @@
     }
     // str1 is not set in the form data
     else {
-        echo "<p>Please enter string from the input form.</p>";
+        echo "<p>Please enter a string from the input form.</p>";
     }
     ?>
     <script src="assets/site.js"></script>
