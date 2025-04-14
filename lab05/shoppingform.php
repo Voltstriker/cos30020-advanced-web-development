@@ -26,9 +26,8 @@
             <label for="quantity">Quantity:</label>
             <input type="number" id="quantity" name="quantity" min="1" required /><br /><br />
         </fieldset>
-        <br>
-        <input type="submit" value="Save to shopping list" />
-        <input type="reset" value="Clear form" />
+        <input class="btn btn-primary" type="submit" value="Save to shopping list" />
+        <input class="btn btn-secondary" type="reset" value="Clear form" />
     </form>
     <script src="assets/site.js"></script>
 </body>

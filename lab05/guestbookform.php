@@ -26,9 +26,8 @@
             <label for="lastname">Last Name:</label>
             <input type="text" id="lastname" name="lastname" required /><br /><br />
         </fieldset>
-        <br>
-        <input type="submit" value="Submit" />
-        <input type="reset" value="Reset" />
+        <input class="btn btn-primary" type="submit" value="Submit" />
+        <input class="btn btn-secondary" type="reset" value="Reset" />
     </form>
     <script src="assets/site.js"></script>
 </body>

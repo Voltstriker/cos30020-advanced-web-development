@@ -33,17 +33,16 @@
             // Close the file
             fclose($file);
 
-            echo "<p>Item '$item' with quantity '$quantity' has been saved to shoppinglist.txt.</p>";
+            echo "<p class='text-success'>Item '$item' with quantity '$quantity' has been saved to shoppinglist.txt.</p>";
         } else {
-            echo "<p>Error: Unable to open shoppinglist.txt for writing.</p>";
+            echo "<p class='text-failure'>Error: Unable to open shoppinglist.txt for writing.</p>";
         }
     } else {
-        echo "<p>Please enter item and quantity in the <a href=\"shoppingform.php\">input form</a>.</p>";
+        echo "<p class='text-warning'>Please enter item and quantity in the <a href=\"shoppingform.php\">input form</a>.</p>";
     }
     ?>
-    <br>
-    <h3>Current Shopping List</h3>
     <table>
+        <caption>Current Shopping List</caption>
         <tr>
             <th>Item</th>
             <th>Quantity</th>

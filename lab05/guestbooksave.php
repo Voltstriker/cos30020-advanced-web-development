@@ -44,9 +44,11 @@
             echo "<p class='text-failure'>Error: Unable to open guestbook.txt for writing.</p>";
         }
     } else {
-        echo "<p>Please enter your name in the <a href=\"guestbookform.php\">input form</a>.</p>";
+        echo "<p class='text-warning'>Please enter your name in the <a href=\"guestbookform.php\">input form</a>.</p>";
     }
     ?>
+    <br>
+    <a class="btn btn-primary" href="guestbookform.php">Sign the guest book</a>
     <script src="assets/site.js"></script>
 </body>
 
