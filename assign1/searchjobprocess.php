@@ -18,11 +18,53 @@
     ?>
     <h2>Job Vacancy Posting System</h2>
 
+    <a href="searchjobform.php" class="btn btn-primary">New Search</a> <a href="index.php" class="btn btn-secondary">Back to Home</a><br>
+
     <?php
     // Check if the form was submitted
     if (isset($_GET['jobTitle'])) {
         // Get the job details from the form
         $formJobTitle = $_GET['jobTitle'];
+
+        // Get other form values
+        if (isset($_GET['jobPositionType'])) {
+            $formJobPositionType = $_GET['jobPositionType'];
+        } else {
+            $formJobPositionType = null;
+        }
+        if (isset($_GET['jobContractType'])) {
+            $formJobContractType = $_GET['jobContractType'];
+        } else {
+            $formJobContractType = null;
+        }
+        if (isset($_GET['jobLocation'])) {
+            $formJobLocation = $_GET['jobLocation'];
+        } else {
+            $formJobLocation = null;
+        }
+        if (isset($_GET['jobAcceptMethod'])) {
+            $formJobAcceptMethod = $_GET['jobAcceptMethod'];
+        } else {
+            $formJobAcceptMethod = null;
+        }
+        // Break the checkbox array into two variables
+        if (is_array($formJobAcceptMethod)) {
+            if (count($formJobAcceptMethod) > 1) {
+                $formJobAcceptMethodPost = true;
+                $formJobAcceptMethodEmail = true;
+            } else {
+                if ($formJobAcceptMethod[0] == 'Post') {
+                    $formJobAcceptMethodPost = true;
+                    $formJobAcceptMethodEmail = false;
+                } else {
+                    $formJobAcceptMethodPost = false;
+                    $formJobAcceptMethodEmail = true;
+                }
+            }
+        } else {
+            $formJobAcceptMethodPost = false;
+            $formJobAcceptMethodEmail = false;
+        }
 
         // Set the file path for the job postings
         $filename = './jobposts/jobs.txt';
@@ -35,7 +77,7 @@
 
         // Validate the input data
         if (empty($formJobTitle)) {
-            echo "<p class='text-failure'>Error: All fields are required - please return to <a href='index.php'>Home</a> or <a href='searchjobform.php'>Search Jobs</a> page.</p>";
+            echo "<p class='text-failure'>Error: Invalid form data received - no job title provided!</p>";
             exit;
         }
 
@@ -60,6 +102,42 @@
                         // Add the job details to the array
                         $jobDetails[] = [$jobID, $jobTitle, $jobDescription, $jobClosingDate, $jobPositionType, $jobContractType, $jobAcceptMethodPost, $jobAcceptMethodMail, $jobLocation];
                     }
+                    // Filter by job position type if provided
+                    if (!empty($formJobPositionType) && $formJobPositionType !== null) {
+                        $jobDetails = array_filter($jobDetails, function ($job) use ($formJobPositionType) {
+                            return $job[4] === $formJobPositionType;
+                        });
+                    }
+                    // Filter by job contract type if provided
+                    if (!empty($formJobContractType) && $formJobContractType !== null) {
+                        $jobDetails = array_filter($jobDetails, function ($job) use ($formJobContractType) {
+                            return $job[5] === $formJobContractType;
+                        });
+                    }
+                    // Filter by job location if provided
+                    if (!empty($formJobLocation) && $formJobLocation !== null) {
+                        $jobDetails = array_filter($jobDetails, function ($job) use ($formJobLocation) {
+                            return $job[8] === $formJobLocation;
+                        });
+                    }
+                    // Filter by job accept method if provided
+                    if (!empty($formJobAcceptMethod) && $formJobAcceptMethod !== null) {
+                        $jobDetails = array_filter($jobDetails, function ($job) use ($formJobAcceptMethod) {
+                            return in_array($job[6], $formJobAcceptMethod) || in_array($job[7], $formJobAcceptMethod);
+                        });
+                    }
+                    // Filter by job accept method post if provided
+                    if ($formJobAcceptMethodPost) {
+                        $jobDetails = array_filter($jobDetails, function ($job) {
+                            return $job[6] == "1";
+                        });
+                    }
+                    // Filter by job accept method email if provided
+                    if ($formJobAcceptMethodEmail) {
+                        $jobDetails = array_filter($jobDetails, function ($job) {
+                            return $job[7] == "1";
+                        });
+                    }
                 }
             }
 
@@ -76,8 +154,6 @@
 
             // Check if any job details were found
             if (count($jobDetails) > 0) {
-                // Display nav buttons
-                echo '<a href="searchjobform.php" class="btn btn-primary">New Search</a> <a href="index.php" class="btn btn-secondary">Back to Home</a>';
                 // Display the job details
                 echo "<table class='table'>";
                 echo "<caption><strong>Job Postings for: $formJobTitle</strong></caption>";
@@ -109,13 +185,13 @@
                 }
                 echo "</tbody></table>";
             } else {
-                echo "<p class='text-failure'>No job postings found for the given title - please return to <a href='index.php'>Home</a> or <a href='searchjobform.php'>Search Jobs</a> page.</p>";
+                echo "<p class='text-failure'>No job postings found using the current search criteria.</p>";
             }
         } else {
-            echo "<p class='text-failure'>Error: Failed to open the jobs.txt file for reading - please return to <a href='index.php'>Home</a> or <a href='searchjobform.php'>Search Jobs</a> page.</p>";
+            echo "<p class='text-failure'>Error: Failed to open the jobs.txt file for reading.</p>";
         }
     } else {
-        echo "<p class='text-failure'>Invalid form submission - please try submitting the <a href='searchjobform.php'>form</a> again.</p>";
+        echo "<p class='text-failure'>Invalid form submission (no job title provided) - please try submitting the form again.</p>";
     }
     ?>
 

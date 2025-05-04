@@ -18,13 +18,59 @@
     ?>
     <h2>Job Vacancy Posting System</h2>
     <form action="searchjobprocess.php" method="get">
+        <p class="text-failure"><em>* Items marked with an asterix are mandatory</em></p>
         <fieldset>
             <legend>Search Job Postings</legend>
             <div class="form-group">
-                <label for="jobTitle">Position ID: <span class="text-failure">*</span></label>
+                <label for="jobTitle">Job Title: <span class="text-failure">*</span></label>
                 <input type="text" id="jobTitle" name="jobTitle" maxlength="20" pattern="[A-Za-z0-9\s,\.!]{1,20}" required />
-                <input class="btn btn-primary" type="submit" value="Search" />
             </div>
+            <div class="form-group">
+                <label>Position:</label>
+                <div class="radio-group">
+                    <input type="radio" id="fullTime" name="jobPositionType" value="Full Time" />
+                    <label for="jobPositionTypeFullTime">Full Time</label>
+                    <input type="radio" id="partTime" name="jobPositionType" value="Part Time" />
+                    <label for="jobPositionTypePartTime">Part Time</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Contract:</label>
+                <div class="radio-group">
+                    <input type="radio" id="jobContractTypeOnGoing" name="jobContractType" value="On-Going" />
+                    <label for="jobContractTypeOnGoing">On-Going</label>
+                    <input type="radio" id="jobContractTypeFixedTerm" name="jobContractType" value="Fixed Term" />
+                    <label for="jobContractTypeFixedTerm">Fixed Term</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Accept Application by:</label>
+                <div class="radio-group">
+                    <input type="checkbox" id="jobAcceptPost" name="jobAcceptMethod[]" value="Post" />
+                    <label for="jobAcceptPost">Post</label>
+                    <input type="checkbox" id="jobAcceptEmail" name="jobAcceptMethod[]" value="Email" />
+                    <label for="jobAcceptEmail">Email</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="jobLocation">Location:</label>
+                <select id="jobLocation" name="jobLocation">
+                    <option value="" disabled selected>---</option>
+                    <option value="ACT">ACT</option>
+                    <option value="NSW">NSW</option>
+                    <option value="NT">NT</option>
+                    <option value="QLD">QLD</option>
+                    <option value="SA">SA</option>
+                    <option value="TAS">TAS</option>
+                    <option value="VIC">VIC</option>
+                    <option value="WA">WA</option>
+                </select>
+            </div>
+            <input class="btn btn-primary" type="submit" value="Search" />
+            <input class="btn btn-secondary" type="reset" value="Reset" />
         </fieldset>
         <br>
         <a href="index.php" class="btn btn-secondary">Back to Home</a>
