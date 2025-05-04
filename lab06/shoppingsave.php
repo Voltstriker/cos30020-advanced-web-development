@@ -16,6 +16,7 @@
     ?>
     <h2>Task 1: Understanding file and array functions</h2>
     <?php
+    include './lib/arraycolumn.php';
     // Check if the form was submitted
     if (isset($_POST['item']) && isset($_POST['quantity'])) {
         // Get the item and quantity from the form
