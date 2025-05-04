@@ -152,6 +152,13 @@
             }
             unset($job); // break the reference
 
+            // Sort the job details array by closing date (closest to today's date first)
+            usort($jobDetails, function ($a, $b) {
+                $dateA = strtotime($a[3]);
+                $dateB = strtotime($b[3]);
+                return $dateA - $dateB;
+            });
+
             // Check if any job details were found
             if (count($jobDetails) > 0) {
                 // Display the job details
