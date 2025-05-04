@@ -20,7 +20,7 @@
 
     <?php
     // Check if the form was submitted
-    if (isset($_POST['jobID']) && isset($_POST['jobTitle']) && isset($_POST['jobDescription']) && isset($_POST['jobClosingDate']) && isset($_POST['jobPositionType']) && isset($_POST['jobContractType'])) {
+    if (isset($_POST['jobID']) && isset($_POST['jobTitle']) && isset($_POST['jobLocation'])) {
         // Get the job details from the form
         $jobID = $_POST['jobID'];
         $jobTitle = $_POST['jobTitle'];
@@ -29,20 +29,17 @@
         $jobPositionType = $_POST['jobPositionType'];
         $jobContractType = $_POST['jobContractType'];
         $jobLocation = $_POST['jobLocation'];
-        $jobAcceptMethod = $_POST['jobAcceptMethod'];
 
-        // Break the checkbox array into two variables
-        if (count($jobAcceptMethod) > 1) {
-            $jobAcceptMethodPost = true;
-            $jobAcceptMethodEmail = true;
+        // Handle checkboxes for job accept methods
+        if (!isset($_POST['jobAcceptMethodPost'])) {
+            $jobAcceptMethodPost = false;
         } else {
-            if ($jobAcceptMethod[0] == 'Post') {
-                $jobAcceptMethodPost = true;
-                $jobAcceptMethodEmail = false;
-            } else {
-                $jobAcceptMethodPost = false;
-                $jobAcceptMethodEmail = true;
-            }
+            $jobAcceptMethodPost = true;
+        }
+        if (!isset($_POST['jobAcceptMethodEmail'])) {
+            $jobAcceptMethodEmail = false;
+        } else {
+            $jobAcceptMethodEmail = true;
         }
 
         // Set the file path for the job postings
@@ -55,8 +52,8 @@
         }
 
         // Validate the input data
-        if (empty($jobID) || empty($jobTitle) || empty($jobDescription) || empty($jobClosingDate) || empty($jobPositionType) || empty($jobContractType) || empty($jobAcceptMethod) || empty($jobLocation)) {
-            echo "<p class='text-failure'>All fields are required.</p>";
+        if (empty($jobID) || empty($jobTitle) || empty($jobDescription) || empty($jobClosingDate) || empty($jobPositionType) || empty($jobContractType) || empty($jobLocation)) {
+            echo "<p class='text-failure'>Error: Invalid form data received - please try submitting the form again.</p>";
             exit;
         }
 
