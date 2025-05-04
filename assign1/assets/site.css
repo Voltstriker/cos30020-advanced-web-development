@@ -105,6 +105,7 @@ select
     padding: 5px;
     flex: 1;
     max-width: 400px;
+    margin-right: 20px;
 }
 
 input[type="date"] {
