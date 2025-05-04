@@ -24,17 +24,17 @@
 
             <div class="form-group">
                 <label for="jobID">Position ID: <span class="text-failure">*</span></label>
-                <input type="text" id="jobID" name="jobID" required />
+                <input type="text" id="jobID" name="jobID" maxlength="5" pattern="P[0-9]{4}" required />
             </div>
 
             <div class="form-group">
                 <label for="jobTitle">Title: <span class="text-failure">*</span></label>
-                <input type="text" id="jobTitle" name="jobTitle" required />
+                <input type="text" id="jobTitle" name="jobTitle" maxlength="20" pattern="[A-Za-z0-9\s,\.!]{1,20}" required />
             </div>
 
             <div class="form-group">
                 <label for="jobDescription">Description: <span class="text-failure">*</span></label>
-                <textarea type="text" id="jobDescription" name="jobDescription" required></textarea>
+                <textarea type="text" id="jobDescription" name="jobDescription" maxlength="260" required></textarea>
             </div>
 
             <div class="form-group">
