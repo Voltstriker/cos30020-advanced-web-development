@@ -36,7 +36,7 @@
                 $line = fgets($file);
                 if ($line) {
                     list($existingItem, $existingQuantity) = explode(',', trim($line));
-                    $alldata[$existingItem] = $existingQuantity;
+                    $alldata[] = [$existingItem, $existingQuantity];
                 }
             }
             // Close the file stream
@@ -45,9 +45,9 @@
             // Check if the item already exists in the array
             // If it doesn't exist, add it to the array
             $newdata = false;
-            if (!array_key_exists($item, $alldata)) {
+            if (!in_array($item, array_column($alldata, 0))) {
                 // Add the new item and quantity to the array
-                $alldata[$item] = $quantity;
+                $alldata[] = [$item, $quantity];
                 $newdata = true;
             }
 
@@ -98,16 +98,18 @@
                 $line = fgets($file);
                 if ($line) {
                     list($item, $quantity) = explode(',', trim($line));
-                    $alldata[$item] = $quantity;
+                    $alldata[] = [$item, $quantity];
                 }
             }
 
             // Sort the array by item name
-            ksort($alldata);
+            usort($alldata, function ($a, $b) {
+                return strcmp($a[0], $b[0]);
+            });
 
             // Display each item and quantity in a table row
-            foreach ($alldata as $item => $quantity) {
-                echo "<tr><td>$item</td><td>$quantity</td></tr>";
+            foreach ($alldata as $entry) {
+                echo "<tr><td>$entry[0]</td><td>$entry[1]</td></tr>";
             }
 
             // Close the file stream
