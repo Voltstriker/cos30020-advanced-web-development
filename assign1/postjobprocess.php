@@ -78,7 +78,7 @@
             if ($file) {
                 $jobExists = false;
                 while (($line = fgets($file)) !== false) {
-                    $fields = explode('\t', $line);
+                    $fields = explode("\t", $line);
                     if (trim($fields[0]) === $jobID) {
                         $jobExists = true;
                         break;
