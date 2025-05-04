@@ -29,6 +29,7 @@
                 <li>Moderate CSS styling, including custom buttons, shading in tables, bolding/text styling, consideration around element padding/alignment</li>
                 <li>Implemented two layer validation - client side in form, and validation on processing page</li>
                 <li>Small JavaScript script that ensures one of the checkboxes is checked during Job Position creation, toggling the <em>required</em> attribute in the DOM when checked/unchecked</li>
+                <li>Storage of the output file/folder path in a config file, allowing for a different data location to exist between my development environment and the "prod" Mercury server</li>
             </ul>
         </li>
     </ul>
