@@ -24,7 +24,7 @@
 
             <div class="form-group">
                 <label for="jobID">Position ID: <span class="text-failure">*</span></label>
-                <input type="text" id="jobID" name="jobID" maxlength="5" pattern="P[0-9]{4}" required />
+                <input type="text" id="jobID" name="jobID" maxlength="5" pattern="P[0-9]{4}" placeholder="P1234" required />
             </div>
 
             <div class="form-group">
@@ -44,7 +44,7 @@
 
             <div class="form-group">
                 <label>Position: <span class="text-failure">*</span></label>
-                <div>
+                <div class="radio-group">
                     <input type="radio" id="fullTime" name="jobPositionType" value="Full Time" required />
                     <label for="jobPositionTypeFullTime">Full Time</label>
                     <input type="radio" id="partTime" name="jobPositionType" value="Part Time" required />
@@ -54,7 +54,7 @@
 
             <div class="form-group">
                 <label>Contract: <span class="text-failure">*</span></label>
-                <div>
+                <div class="radio-group">
                     <input type="radio" id="jobContractTypeOnGoing" name="jobContractType" value="On-Going" required />
                     <label for="jobContractTypeOnGoing">On-Going</label>
                     <input type="radio" id="jobContractTypeFixedTerm" name="jobContractType" value="Fixed Term" required />
@@ -64,7 +64,7 @@
 
             <div class="form-group">
                 <label>Accept Application by: <span class="text-failure">*</span></label>
-                <div>
+                <div class="radio-group">
                     <input type="checkbox" id="jobAcceptPost" name="jobAcceptMethod[]" value="Post" />
                     <label for="jobAcceptPost">Post</label>
                     <input type="checkbox" id="jobAcceptEmail" name="jobAcceptMethod[]" value="Email" />
