@@ -1,0 +1,5 @@
+McDonald,Ronald,ronald.mcdonald@maccas.com.au
+Obama,Barack,potus@us.gov
+Earles,Jayden,mail@jaydenearles.com
+Lincoln,Abraham,whatisemail@ithasntbeeninventedyet.com
+Name,Test,testemail@gmail.com
