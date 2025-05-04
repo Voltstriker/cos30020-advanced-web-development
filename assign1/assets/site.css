@@ -90,6 +90,58 @@ fieldset > legend {
     padding: 0 10px;
 }
 
+fieldset > label {
+    min-width: 150px;
+    display: inline-block;
+    margin: 0 75px 15px 0;
+    font-weight: bold;
+}
+
+input[type="text"],
+textarea,
+select
+{
+    min-width: 250px;
+    padding: 5px;
+    flex: 1;
+    max-width: 400px;
+}
+
+input[type="date"] {
+    width: 120px;
+    padding: 5px;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-group > label {
+    display: inline-block;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.form-group > label:first-of-type {
+    min-width: 250px;
+}
+
+.radio-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.radio-group > label:first-of-type {
+
+    display: inline-block;
+
+    font-weight: bold;
+}
+
 .btn {
     background-color: #007bff;
     color: white;
