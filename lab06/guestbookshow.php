@@ -50,7 +50,16 @@
 
                 // Sort the copy by first name (index 0)
                 usort($alldata, function ($a, $b) {
-                    return strcmp($a[0], $b[0]);
+                    // Compare first elements
+                    $cmp = strcmp($a[0], $b[0]);
+                    if ($cmp !== 0) return $cmp;
+
+                    // Compare second elements
+                    $cmp = strcmp($a[1], $b[1]);
+                    if ($cmp !== 0) return $cmp;
+
+                    // Compare third elements
+                    return strcmp($a[2], $b[2]);
                 });
 
                 // Display each guest signature in the table
