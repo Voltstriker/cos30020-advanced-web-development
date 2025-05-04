@@ -8,7 +8,7 @@
     <meta name="author" content="Jayden Earles" />
     <title>Assignment 2: System development project 1</title>
 
-    <link rel="stylesheet" href="assets/site.css" />
+    <link rel="stylesheet" href="./site.css" />
 </head>
 
 <body>

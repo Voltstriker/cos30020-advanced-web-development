@@ -8,7 +8,7 @@
     <meta name="author" content="Jayden Earles" />
     <title>Assignment 2: System development project 1</title>
 
-    <link rel="stylesheet" href="assets/site.css" />
+    <link rel="stylesheet" href="./site.css" />
 </head>
 
 <body>
@@ -16,7 +16,7 @@
     include 'header.php';
     ?>
     <h2>Assignment 2: System development project 1</h2>
-    <p>The requirements for this assignment are listed in the <a href="assets/Assignment 2 System development project 1.pdf" target="_blank">worksheet document</a>.</p>
+    <p>The requirements for this assignment are listed in the <a href="assets/Assignment_2.pdf" target="_blank">worksheet document</a>.</p>
 
     <br>
 
