@@ -69,7 +69,7 @@
                     echo "<p class='text-failure'>Error: Unable to open shop.txt for writing.</p>";
                 }
             } else {
-                echo "<p class='text-failure'>Item '$item' already exists in the shopping list with quantity '$alldata[$item]'.</p>";
+                echo "<p class='text-failure'>Item '$item' already exists in the shopping list.</p>";
             }
         } else {
             echo "<p class='text-failure'>Error: Unable to open shop.txt for writing.</p>";
@@ -98,17 +98,17 @@
                 $line = fgets($file);
                 if ($line) {
                     list($item, $quantity) = explode(',', trim($line));
-                    $alldata[] = [$item, $quantity];
+                    $shoppinglist[] = [$item, $quantity];
                 }
             }
 
             // Sort the array by item name
-            usort($alldata, function ($a, $b) {
+            usort($shoppinglist, function ($a, $b) {
                 return strcmp($a[0], $b[0]);
             });
 
             // Display each item and quantity in a table row
-            foreach ($alldata as $entry) {
+            foreach ($shoppinglist as $entry) {
                 echo "<tr><td>$entry[0]</td><td>$entry[1]</td></tr>";
             }
 
