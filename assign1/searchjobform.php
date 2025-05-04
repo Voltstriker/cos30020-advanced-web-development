@@ -75,6 +75,7 @@
         <br>
         <a href="index.php" class="btn btn-secondary">Back to Home</a>
     </form>
+    <script src="scripts/searchjobform.js"></script>
     <script src="scripts/site.js"></script>
 </body>
 
