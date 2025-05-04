@@ -19,6 +19,9 @@
     <h2>Job Vacancy Posting System</h2>
 
     <?php
+    // Set the file path for the job postings
+    include 'config.php';
+
     // Check if the form was submitted
     if (isset($_POST['jobID']) && isset($_POST['jobTitle']) && isset($_POST['jobLocation'])) {
         // Get the job details from the form
@@ -42,12 +45,9 @@
             $jobAcceptMethodEmail = true;
         }
 
-        // Set the file path for the job postings
-        $filename = './jobposts/jobs.txt';
-
         // Check if the file exists, if not create it
-        if (!file_exists($filename)) {
-            $file = fopen($filename, 'w');
+        if (!file_exists($outputPath)) {
+            $file = fopen($outputPath, 'w');
             fclose($file);
         }
 
@@ -74,7 +74,7 @@
         }
         // Check if the job ID already exists in the file
         else {
-            $file = @fopen($filename, 'r');
+            $file = @fopen($outputPath, 'r');
             if ($file) {
                 $jobExists = false;
                 while (($line = fgets($file)) !== false) {
@@ -113,7 +113,7 @@
         // ======================================================
 
         // Open the file in append mode
-        $file = @fopen($filename, 'a');
+        $file = @fopen($outputPath, 'a');
 
         // Check if the file was opened successfully
         if ($file) {

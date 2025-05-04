@@ -21,6 +21,9 @@
     <a href="searchjobform.php" class="btn btn-primary">New Search</a> <a href="index.php" class="btn btn-secondary">Back to Home</a><br>
 
     <?php
+    // Set the file path for the job postings
+    include 'config.php';
+
     // Check if the form was submitted
     if (isset($_GET['jobTitle'])) {
         // Get the job details from the form
@@ -57,12 +60,9 @@
             $formJobAcceptMethodEmail = false;
         }
 
-        // Set the file path for the job postings
-        $filename = './jobposts/jobs.txt';
-
         // Check if the file exists, if not create it
-        if (!file_exists($filename)) {
-            $file = fopen($filename, 'w');
+        if (!file_exists($outputPath)) {
+            $file = fopen($outputPath, 'w');
             fclose($file);
         }
 
@@ -77,7 +77,7 @@
         // ======================================================
 
         // Open the file in append mode
-        $file = @fopen($filename, 'r');
+        $file = @fopen($outputPath, 'r');
 
         // Check if the file was opened successfully
         if ($file) {
@@ -183,7 +183,7 @@
                 echo "<p class='text-failure'>No job postings found using the current search criteria.</p>";
             }
         } else {
-            echo "<p class='text-failure'>Error: Failed to open the jobs.txt file for reading.</p>";
+            echo "<p class='text-failure'>Error: Failed to open the $filename file for reading.</p>";
         }
     } else {
         echo "<p class='text-failure'>Invalid form submission (no job title provided) - please try submitting the form again.</p>";
