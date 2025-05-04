@@ -28,7 +28,7 @@
         <li><strong>Email:</strong> <a href="mailto:100684019@student.swin.edu.au" target="_blank">100684019@student.swin.edu.au</a></li>
     </ul>
 
-    <script src="assets/site.js"></script>
+    <script src="scripts/site.js"></script>
 </body>
 
 </html>

@@ -75,7 +75,7 @@
         <br>
         <a href="index.php" class="btn btn-secondary">Back to Home</a>
     </form>
-    <script src="assets/site.js"></script>
+    <script src="scripts/site.js"></script>
 </body>
 
 </html>

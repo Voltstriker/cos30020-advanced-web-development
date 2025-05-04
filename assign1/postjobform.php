@@ -90,8 +90,8 @@
         <input class="btn btn-primary" type="submit" value="Submit" />
         <input class="btn btn-secondary" type="reset" value="Reset" />
     </form>
-    <script src="assets/site.js"></script>
-    <script src="assets/postjobform.js"></script>
+    <script src="scripts/site.js"></script>
+    <script src="scripts/postjobform.js"></script>
 </body>
 
 </html>

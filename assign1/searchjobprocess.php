@@ -190,7 +190,7 @@
     }
     ?>
 
-    <script src="assets/site.js"></script>
+    <script src="scripts/site.js"></script>
 </body>
 
 </html>
