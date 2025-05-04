@@ -32,37 +32,28 @@
         } else {
             $formJobPositionType = null;
         }
+
         if (isset($_GET['jobContractType'])) {
             $formJobContractType = $_GET['jobContractType'];
         } else {
             $formJobContractType = null;
         }
+
         if (isset($_GET['jobLocation'])) {
             $formJobLocation = $_GET['jobLocation'];
         } else {
             $formJobLocation = null;
         }
-        if (isset($_GET['jobAcceptMethod'])) {
-            $formJobAcceptMethod = $_GET['jobAcceptMethod'];
-        } else {
-            $formJobAcceptMethod = null;
-        }
-        // Break the checkbox array into two variables
-        if (is_array($formJobAcceptMethod)) {
-            if (count($formJobAcceptMethod) > 1) {
-                $formJobAcceptMethodPost = true;
-                $formJobAcceptMethodEmail = true;
-            } else {
-                if ($formJobAcceptMethod[0] == 'Post') {
-                    $formJobAcceptMethodPost = true;
-                    $formJobAcceptMethodEmail = false;
-                } else {
-                    $formJobAcceptMethodPost = false;
-                    $formJobAcceptMethodEmail = true;
-                }
-            }
+
+        if (isset($_GET['jobAcceptMethodPost'])) {
+            $formJobAcceptMethodPost = true;
         } else {
             $formJobAcceptMethodPost = false;
+        }
+
+        if (isset($_GET['jobAcceptMethodEmail'])) {
+            $formJobAcceptMethodEmail = true;
+        } else {
             $formJobAcceptMethodEmail = false;
         }
 
@@ -126,18 +117,6 @@
                             return in_array($job[6], $formJobAcceptMethod) || in_array($job[7], $formJobAcceptMethod);
                         });
                     }
-                    // Filter by job accept method post if provided
-                    if ($formJobAcceptMethodPost) {
-                        $jobDetails = array_filter($jobDetails, function ($job) {
-                            return $job[6] == "1";
-                        });
-                    }
-                    // Filter by job accept method email if provided
-                    if ($formJobAcceptMethodEmail) {
-                        $jobDetails = array_filter($jobDetails, function ($job) {
-                            return $job[7] == "1";
-                        });
-                    }
                 }
             }
 
@@ -151,6 +130,18 @@
                 $job[7] = ($job[7] == "1") ? "True" : "False";
             }
             unset($job); // break the reference
+
+            print_r("formJobAcceptMethodPost: " . $formJobAcceptMethodPost . "<br>");
+            print_r("formJobAcceptMethodEmail: " . $formJobAcceptMethodEmail . "<br>");
+
+            // Filter by job accept method post or email if provided
+            if ($formJobAcceptMethodPost == "True" || $formJobAcceptMethodEmail == "True") {
+                $jobDetails = array_filter($jobDetails, function ($job) use ($formJobAcceptMethodPost, $formJobAcceptMethodEmail) {
+                    $acceptPost = ($formJobAcceptMethodPost == "True" && $job[6] == "True");
+                    $acceptEmail = ($formJobAcceptMethodEmail == "True" && $job[7] == "True");
+                    return $acceptPost || $acceptEmail;
+                });
+            }
 
             // Sort the job details array by closing date (closest to today's date first)
             usort($jobDetails, function ($a, $b) {
