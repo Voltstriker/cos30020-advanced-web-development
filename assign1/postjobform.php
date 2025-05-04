@@ -65,10 +65,10 @@
             <div class="form-group">
                 <label>Accept Application by: <span class="text-failure">*</span></label>
                 <div class="radio-group">
-                    <input type="checkbox" id="jobAcceptPost" name="jobAcceptMethod[]" value="Post" />
-                    <label for="jobAcceptPost">Post</label>
-                    <input type="checkbox" id="jobAcceptEmail" name="jobAcceptMethod[]" value="Email" />
-                    <label for="jobAcceptEmail">Email</label>
+                    <input type="checkbox" id="jobAcceptMethodPost" name="jobAcceptMethodPost" value="Post" required />
+                    <label for="jobAcceptMethodPost">Post</label>
+                    <input type="checkbox" id="jobAcceptMethodEmail" name="jobAcceptMethodEmail" value="Email" required />
+                    <label for="jobAcceptMethodEmail">Email</label>
                 </div>
             </div>
 
@@ -91,6 +91,7 @@
         <input class="btn btn-secondary" type="reset" value="Reset" />
     </form>
     <script src="assets/site.js"></script>
+    <script src="assets/postjobform.js"></script>
 </body>
 
 </html>

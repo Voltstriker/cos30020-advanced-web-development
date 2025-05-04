@@ -28,6 +28,7 @@
                 <li>Small JavaScript script that changes the underlined item in navbar based on file name</li>
                 <li>Moderate CSS styling, including custom buttons, shading in tables, bolding/text styling, consideration around element padding/alignment</li>
                 <li>Implemented two layer validation - client side in form, and validation on processing page</li>
+                <li>Small JavaScript script that ensures one of the checkboxes is checked during Job Position creation, toggling the <em>required</em> attribute in the DOM when checked/unchecked</li>
             </ul>
         </li>
     </ul>
