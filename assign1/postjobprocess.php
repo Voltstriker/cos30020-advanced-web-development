@@ -30,19 +30,21 @@
         $jobContractType = $_POST['jobContractType'];
         $jobLocation = $_POST['jobLocation'];
         $jobAcceptMethod = $_POST['jobAcceptMethod'];
+
         // Break the checkbox array into two variables
         if (count($jobAcceptMethod) > 1) {
             $jobAcceptMethodPost = true;
-            $jobAcceptMethodMail = true;
+            $jobAcceptMethodEmail = true;
         } else {
             if ($jobAcceptMethod[0] == 'Post') {
                 $jobAcceptMethodPost = true;
-                $jobAcceptMethodMail = false;
+                $jobAcceptMethodEmail = false;
             } else {
                 $jobAcceptMethodPost = false;
-                $jobAcceptMethodMail = true;
+                $jobAcceptMethodEmail = true;
             }
         }
+
         // Set the file path for the job postings
         $filename = './jobposts/jobs.txt';
 
@@ -107,7 +109,7 @@
         // Check if the file was opened successfully
         if ($file) {
             // Write the job details to the file
-            fwrite($file, "$jobID\t$jobTitle\t$jobDescription\t$jobClosingDate\t$jobPositionType\t$jobContractType\t$jobAcceptMethodPost\t$jobAcceptMethodMail\t$jobLocation\n");
+            fwrite($file, "$jobID\t$jobTitle\t$jobDescription\t$jobClosingDate\t$jobPositionType\t$jobContractType\t$jobAcceptMethodPost\t$jobAcceptMethodEmail\t$jobLocation\n");
 
             // Close the file stream
             fclose($file);

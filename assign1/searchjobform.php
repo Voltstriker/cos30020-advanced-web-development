@@ -21,7 +21,7 @@
         <fieldset>
             <legend>Search Job Postings</legend>
             <div class="form-group">
-                <label for="jobID">Position ID: <span class="text-failure">*</span></label>
+                <label for="jobTitle">Position ID: <span class="text-failure">*</span></label>
                 <input type="text" id="jobTitle" name="jobTitle" maxlength="20" pattern="[A-Za-z0-9\s,\.!]{1,20}" required />
                 <input class="btn btn-primary" type="submit" value="Search" />
             </div>
