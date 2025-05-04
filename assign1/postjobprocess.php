@@ -96,6 +96,18 @@
             }
         }
 
+        // Check if the job title is valid (certain characters and max of 20 characters)
+        if (strlen($jobTitle) > 20 || !preg_match('/^[A-Za-z0-9\s,\.!]+$/', $jobTitle)) {
+            echo "<p class='text-failure'>Error: Job title is invalid. It should be a maximum of 20 characters and can only contain letters, numbers, spaces, and hyphens.</p>";
+            exit;
+        }
+
+        // Check if the job description is valid (certain characters and max of 260 characters)
+        if (strlen($jobDescription) > 260) {
+            echo "<p class='text-failure'>Error: Job description is invalid. It should be a maximum of 260 characters.</p>";
+            exit;
+        }
+
         // ======================================================
         // VALIDATION PASSED - Proceed to save the job posting
         // ======================================================

@@ -29,7 +29,7 @@
 
             <div class="form-group">
                 <label for="jobTitle">Title: <span class="text-failure">*</span></label>
-                <input type="text" id="jobTitle" name="jobTitle" maxlength="20" pattern="[A-Za-z0-9\s,\.!]{1,20}" required />
+                <input type="text" id="jobTitle" name="jobTitle" maxlength="20" pattern="[A-Za-z0-9\s,\.!]+" required />
             </div>
 
             <div class="form-group">
