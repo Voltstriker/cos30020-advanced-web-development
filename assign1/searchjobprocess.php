@@ -131,9 +131,6 @@
             }
             unset($job); // break the reference
 
-            print_r("formJobAcceptMethodPost: " . $formJobAcceptMethodPost . "<br>");
-            print_r("formJobAcceptMethodEmail: " . $formJobAcceptMethodEmail . "<br>");
-
             // Filter by job accept method post or email if provided
             if ($formJobAcceptMethodPost == "True" || $formJobAcceptMethodEmail == "True") {
                 $jobDetails = array_filter($jobDetails, function ($job) use ($formJobAcceptMethodPost, $formJobAcceptMethodEmail) {
