@@ -45,7 +45,10 @@
             $jobAcceptMethodEmail = true;
         }
 
-        // Check if the file exists, if not create it
+        // Check if the file and folder path exists, if not create it
+        if (!is_dir($folderPath)) {
+            mkdir($folderPath, 0777, true);
+        }
         if (!file_exists($outputPath)) {
             $file = fopen($outputPath, 'w');
             fclose($file);
