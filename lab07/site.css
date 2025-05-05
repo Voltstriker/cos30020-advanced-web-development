@@ -178,3 +178,10 @@ input[type="date"] {
 .btn-secondary:hover {
     background-color: #010203;
 }
+
+.floating-panel {
+    display: inline-block;
+    position: relative;
+    margin: 0 10px 10px 0;
+    padding: 10px;
+}

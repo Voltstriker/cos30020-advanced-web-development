@@ -18,6 +18,17 @@
     <h2>Databases and MySQL</h2>
     <p>The requirements for this lab are listed in the <a href="assets/COS30020 Lab_07b v2.docx" target="_blank">worksheet document</a>.</p>
 
+    <div style="display: flex; align-items: baseline;">
+        <div class="floating-panel">
+            <h3>Cars Table - Creation</h3>
+            <img src="assets/creation.png" alt="Cars Table" />
+        </div>
+        <div class="floating-panel">
+            <h3>Cars Table - Query</h3>
+            <img src="assets/cars.png" alt="Cars Table" width="600" height="400" />
+        </div>
+    </div>
+
     <script src="scripts/site.js"></script>
 </body>
 
