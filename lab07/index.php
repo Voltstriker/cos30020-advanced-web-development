@@ -25,7 +25,7 @@
         </div>
         <div class="floating-panel">
             <h3>Cars Table - Query</h3>
-            <img src="assets/cars.png" alt="Cars Table" width="600" height="400" />
+            <img src="assets/cars.png" alt="Cars Table" />
         </div>
     </div>
 
