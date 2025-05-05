@@ -1,0 +1,180 @@
+@font-face {
+    font-family: "Roboto";
+    src:
+      url("./fonts/Roboto-Regular.ttf") format("truetype"),
+      url("./fonts/Roboto-Bold.ttf") format("truetype"),
+      url("./fonts/Roboto-Italic.ttf") format("truetype")
+  }
+
+
+body {
+    font-family: "Roboto", sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0px 15px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 20px 0;
+    font-family: "Arial", sans-serif;
+}
+
+table {
+    border: 1px solid #000;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+
+table > caption {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+th, td {
+    border: 1px solid #000;
+    padding: 10px;
+    min-width: 100px;
+}
+
+th {
+    background-color: #f2f2f2;
+    text-align: center;
+}
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0 0 0;
+}
+
+#header > ul {
+    list-style: none;
+}
+
+#header > ul > li {
+    padding: 5px;
+    margin: 15px;
+    float: left;
+    font-weight: bold;
+}
+
+#header > ul > li > a {
+    text-decoration: none;
+    color: #0000EE;
+}
+
+#header > ul > li > a.active {
+    text-decoration: underline;
+}
+
+#header > ul > li > a:hover {
+    text-decoration: underline;
+}
+
+a, a:visited {
+    color: #0000EE;
+}
+
+.text-success {
+    color: #28a745;
+}
+
+.text-failure {
+    color: #dc3545;
+}
+
+.text-warning {
+    color: #d48900;
+}
+
+fieldset {
+    border: 1px solid #000;
+    padding: 10px;
+    margin: 10px 0;
+}
+fieldset > legend {
+    font-weight: bold;
+    padding: 0 10px;
+}
+
+fieldset > label {
+    min-width: 150px;
+    display: inline-block;
+    margin: 0 75px 15px 0;
+    font-weight: bold;
+}
+
+input[type="text"],
+textarea
+{
+    min-width: 250px;
+    padding: 5px;
+    flex: 1;
+    max-width: 400px;
+    margin-right: 20px;
+}
+
+select {
+    width: 120px;
+    padding: 5px;
+}
+
+input[type="date"] {
+    width: 120px;
+    padding: 5px;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-group > label {
+    display: inline-block;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.form-group > label:first-of-type {
+    min-width: 250px;
+}
+
+.radio-group > label {
+    margin-right: 20px;
+}
+
+.btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.btn:hover {
+    background-color: #0056b3;
+}
+.btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+.btn-primary {
+    background-color: #007bff;
+    color: white !important;
+}
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+.btn-secondary {
+    background-color: #5a6268;
+    color: white !important;
+}
+.btn-secondary:hover {
+    background-color: #010203;
+}
