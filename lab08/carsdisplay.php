@@ -15,7 +15,7 @@
     <?php
     include 'header.php';
     ?>
-    <h2>MySQL Databases with PHP</h2>
+    <h2>Task 1: Retrieve and display records from the table</h2>
     <?php
     // Connect to the database
     require_once './settings.php';
