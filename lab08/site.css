@@ -109,6 +109,7 @@ fieldset > label {
 }
 
 input[type="text"],
+input[type="email"],
 textarea
 {
     min-width: 250px;
@@ -124,6 +125,11 @@ select {
 }
 
 input[type="date"] {
+    width: 120px;
+    padding: 5px;
+}
+
+input[type="tel"] {
     width: 120px;
     padding: 5px;
 }
@@ -150,7 +156,7 @@ input[type="date"] {
 
 .btn {
     background-color: #007bff;
-    color: white;
+    color: white !important;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -177,6 +183,13 @@ input[type="date"] {
 }
 .btn-secondary:hover {
     background-color: #010203;
+}
+.btn-tertiary {
+    background-color: #28a745;
+    color: white !important;
+}
+.btn-tertiary:hover {
+    background-color: #1c702f;
 }
 
 .floating-panel {
