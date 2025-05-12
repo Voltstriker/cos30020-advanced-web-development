@@ -86,6 +86,7 @@
         die("<p class='text-failure'>Invalid form submission - please try submitting the <a href='member_add_form.php'>form</a> again.</p>");
     }
     ?>
+    <br><br>
     <a class="btn btn-primary" href="member_add_form.php">Add Another Member</a>
     <a class="btn btn-secondary" href="member_display.php">Display All Members</a>
     <script src="scripts/site.js"></script>

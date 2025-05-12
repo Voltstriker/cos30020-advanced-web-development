@@ -37,7 +37,7 @@
     // Check if the form was submitted
     if (isset($_GET['lastname'])) {
         echo "<h3>Search Results:</h3>";
-        echo "<p>Searching for members with the last name: <strong>" . htmlspecialchars($_GET['lastname']) . "</strong></p>";
+        echo "<p>Searching for members with a last name like: <strong>" . htmlspecialchars($_GET['lastname']) . "</strong></p>";
 
         // Get the last name from the form
         $lastname = htmlspecialchars($_GET['lastname']);
