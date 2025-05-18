@@ -52,19 +52,22 @@ if (isset($_POST['guess']) && is_numeric($_POST['guess'])) {
             </div>
             <p>Guess Count: <?php echo $guess_count; ?></p>
             <?php
-            // Check if the guess is valid and provide hints
-            if ($guess != -1 && $guess >= 1 && $guess <= 100) {
-                if ($guess < $num) {
-                    echo "<p class='text-failure text-bold'>Your guess is too low!</p>";
-                } elseif ($guess > $num) {
-                    echo "<p class='text-failure text-bold'>Your guess is too high!</p>";
-                } else {
-                    echo "<p class='text-success text-bold'>Congratulations! You guessed the number $num in $guess_count attempt" . ($guess > 1 ? "s" : "") . ".</p>";
+            // Only show the hints if the user has actually made a guess
+            if (isset($_POST['guess'])) {
+                // Check if the guess is valid and provide hints
+                if ($guess != -1 && $guess >= 1 && $guess <= 100) {
+                    if ($guess < $num) {
+                        echo "<p class='text-failure text-bold'>Your guess is too low!</p>";
+                    } elseif ($guess > $num) {
+                        echo "<p class='text-failure text-bold'>Your guess is too high!</p>";
+                    } else {
+                        echo "<p class='text-success text-bold'>Congratulations! You guessed the number $num in $guess_count attempt" . ($guess > 1 ? "s" : "") . ".</p>";
+                    }
                 }
-            }
-            // Invalid guess entry
-            else {
-                echo "<p class='text-warning'>Please enter a number between 1 and 100.</p>";
+                // Invalid guess entry
+                else {
+                    echo "<p class='text-warning'>Please enter a number between 1 and 100.</p>";
+                }
             }
             ?>
         </fieldset>
