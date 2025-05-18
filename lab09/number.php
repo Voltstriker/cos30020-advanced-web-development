@@ -1,5 +1,6 @@
 <?php
 session_start();
+// Initialize the session variable for the number
 if (isset($_SESSION['number'])) {
     $num = $_SESSION['number'];
 } else {
