@@ -1,17 +1,21 @@
 <?php
 session_start();
+// Handle the guess count
 if (isset($_SESSION['guess_count'])) {
     $guess_count = $_SESSION['guess_count'];
 } else {
     $guess_count = 0;
 }
+// Handle the random number generation
 if (!isset($_SESSION['number'])) {
     $num = rand(1, 100);
     $_SESSION['number'] = $num;
 } else {
     $num = $_SESSION['number'];
 }
-if (isset($_POST['guess'])) {
+// Handle the guess input - ensure it is numeric
+// There is a check below to see if between 1 and 100
+if (isset($_POST['guess']) && is_numeric($_POST['guess'])) {
     $guess = $_POST['guess'];
     $guess_count++;
     $_SESSION['guess_count'] = $guess_count;
@@ -48,7 +52,8 @@ if (isset($_POST['guess'])) {
             </div>
             <p>Guess Count: <?php echo $guess_count; ?></p>
             <?php
-            if ($guess != -1) {
+            // Check if the guess is valid and provide hints
+            if ($guess != -1 && $guess >= 1 && $guess <= 100) {
                 if ($guess < $num) {
                     echo "<p class='text-failure text-bold'>Your guess is too low!</p>";
                 } elseif ($guess > $num) {
@@ -57,10 +62,16 @@ if (isset($_POST['guess'])) {
                     echo "<p class='text-success text-bold'>Congratulations! You guessed the number $num in $guess_count attempt" . ($guess > 1 ? "s" : "") . ".</p>";
                 }
             }
+            // Invalid guess entry
+            else {
+                echo "<p class='text-warning'>Please enter a number between 1 and 100.</p>";
+            }
             ?>
         </fieldset>
         <br>
         <?php
+        // Display the "Play Again" button if the user has guessed the number
+        // Otherwise, show the "Give Up" and "Start Over" buttons
         if ($guess == $num) {
             echo '<a class="btn btn-tertiary" href="startover.php">Play Again</a>';
         } else {
