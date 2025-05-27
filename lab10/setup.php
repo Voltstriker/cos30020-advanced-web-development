@@ -79,7 +79,7 @@
 
             // Encode the settings as JSON and write to the file
             $jsonSettings = json_encode($settings, JSON_PRETTY_PRINT);
-            if (file_put_contents($settingsFile, $jsonSettings) === false) {
+            if (@file_put_contents($settingsFile, $jsonSettings) === false) {
                 die("<p class='text-failure'>Failed to write database connection details to file.</p>");
             }
 
