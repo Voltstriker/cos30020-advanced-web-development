@@ -68,7 +68,7 @@
 
             // Store the connection details in a text file
             // Convert the connection details to a JSON format
-            $settingsFile = './data/mykeys.txt';
+            $settingsFile = './data/lab10/mykeys.txt';
             $settings = [
                 'hostname' => $host,
                 'port' => $port,
