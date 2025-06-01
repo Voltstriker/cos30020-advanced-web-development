@@ -38,16 +38,16 @@
                 <td><a href="cases/fixed/c02_ExplorersQuiz.html" target="_blank">c02_ExplorersQuiz.html</a></td>
             </tr>
             <tr>
+                <td><a href="cases/c02_ScoreQuiz.php" target="_blank">c02_ScoreQuiz.php</a></td>
+                <td><a href="cases/fixed/c02_ScoreQuiz.php" target="_blank">c02_ScoreQuiz.php</a></td>
+            </tr>
+            <tr>
                 <td><a href="cases/c02_LeapYear.html" target="_blank">c02_LeapYear.html</a></td>
                 <td><a href="cases/fixed/c02_LeapYear.html" target="_blank">c02_LeapYear.html</a></td>
             </tr>
             <tr>
                 <td><a href="cases/c02_LeapYear.php" target="_blank">c02_LeapYear.php</a></td>
                 <td><a href="cases/fixed/c02_LeapYear.php" target="_blank">c02_LeapYear.php</a></td>
-            </tr>
-            <tr>
-                <td><a href="cases/c02_ScoreQuiz.php" target="_blank">c02_ScoreQuiz.php</a></td>
-                <td><a href="cases/fixed/c02_ScoreQuiz.php" target="_blank">c02_ScoreQuiz.php</a></td>
             </tr>
             <tr>
                 <td rowspan="1">Case Study 3</td>
