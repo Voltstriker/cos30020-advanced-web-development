@@ -1,3 +1,8 @@
+<?php
+// Import the MySQL connection details
+require_once 'config.inc.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,7 +53,74 @@
                     </div>
                     <main class="col-12">
                         <div class="row site-content">
+                            <?php
+                            // Connect to the database
+                            $db_connection = @mysqli_connect($hostname, $username, $password)
+                                or die("<p class='text-failure'>Unable to connect to the database server.</p>"
+                                    . "<p class='text-failure'>Error code " . mysqli_connect_errno()
+                                    . ": " . mysqli_connect_error()) . "</p>";
 
+                            // Select the database
+                            if (!@mysqli_select_db($db_connection, $database)) {
+                                die("<p class='text-failure'>Unable to locate the '$database' database within the server.</p>");
+                            }
+
+                            // Check if the database tables exist
+                            $tables = ['friends', 'myfriends'];
+                            $missing_tables = [];
+                            foreach ($tables as $table) {
+                                $query = "SHOW TABLES LIKE '$table'";
+                                $result = mysqli_query($db_connection, $query);
+                                if (mysqli_num_rows($result) == 0) {
+                                    $missing_tables[] = $table;
+                                }
+                            }
+
+                            // If any required tables are missing, display an error message
+                            // Afterwards, create the tables
+                            if (!empty($missing_tables)) {
+                                echo "<p class='text-error'>The following required tables are missing from the database: \""
+                                    . implode('", "', $missing_tables) . "\".</p>";
+
+                                echo "<br><br><p class='text-warning'>Attempting to create the missing tables...</p><ul>";
+
+                                // Create the missing tables
+                                foreach ($missing_tables as $table) {
+                                    if ($table == 'friends') {
+                                        $create_query = "CREATE TABLE friends (
+                                            `friend_id` INT NOT NULL AUTO_INCREMENT,
+                                            `friend_email` VARCHAR(50) NOT NULL,
+                                            `password` VARCHAR(20) NOT NULL,
+                                            `profile_name` VARCHAR(30) NOT NULL,
+                                            `date_started` DATE NOT NULL,
+                                            `num_of_friends` INT UNSIGNED NOT NULL DEFAULT 0,
+                                            CONSTRAINT PK_Friends PRIMARY KEY (friend_id),
+                                            CONSTRAINT UQ_Friends_Email UNIQUE (friend_email)
+                                        )";
+                                    } elseif ($table == 'myfriends') {
+                                        $create_query = "CREATE TABLE myfriends (
+                                            friend_id1 INT NOT NULL,
+                                            friend_id2 INT NOT NULL,
+                                            CONSTRAINT PK_MyFriends PRIMARY KEY (friend_id1, friend_id2),
+                                            CONSTRAINT FK_MyFriends_Friend1 FOREIGN KEY (friend_id1) REFERENCES friends(friend_id),
+                                            CONSTRAINT FK_MyFriends_Friend2 FOREIGN KEY (friend_id2) REFERENCES friends(friend_id)
+                                        )";
+                                    }
+
+                                    if (mysqli_query($db_connection, $create_query)) {
+                                        echo "<li class='text-success'>Table '$table' created successfully.</li>";
+                                    } else {
+                                        echo "<p class='text-error'>Error creating table '$table': " . mysqli_error($db_connection) . "</p>";
+                                    }
+                                }
+
+                                echo "</ul>";
+                            }
+
+                            // Close the database connection
+                            mysqli_free_result($result);
+                            mysqli_close($db_connection);
+                            ?>
                         </div>
                     </main>
                 </div>
