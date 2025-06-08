@@ -146,3 +146,6 @@ require_once 'config.inc.php';
                     </main>
                 </div>
             </div>
+        </div>
+    </div>
+</body>
