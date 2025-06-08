@@ -31,6 +31,31 @@
                 </div>
             </div>
         </div>
+        <div class="container">
+            <div class="row">
+                <nav class="col">
+                    <div class="brand">
+                        <span class="brand-image"></span>
+                        <span class="brand-title">RazorBook</span>
+                    </div>
+                    <ul class="nav-pills col-6">
+                        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Help</a></li>
+                    </ul>
+                    <div class="user">
+                        <span>Jayden Earles | <a class="btn btn-primary" href="#">Logout</a></span>
+                    </div>
+                </nav>
+                <main class="row">
+
+                </main>
+                <footer class="row">
+
+                </footer>
+            </div>
+        </div>
     </div>
 </body>
 
