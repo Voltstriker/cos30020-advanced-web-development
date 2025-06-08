@@ -80,9 +80,7 @@ require_once 'config.inc.php';
                             // Afterwards, create the tables
                             if (!empty($missing_tables)) {
                                 echo "<p class='text-error'>The following required tables are missing from the database: \""
-                                    . implode('", "', $missing_tables) . "\".</p>";
-
-                                echo "<br><br><p class='text-warning'>Attempting to create the missing tables...</p><ul>";
+                                    . implode('", "', $missing_tables) . "\". Attempting to create the missing tables...</p><ul>";
 
                                 // Create the missing tables
                                 foreach ($missing_tables as $table) {
@@ -97,6 +95,18 @@ require_once 'config.inc.php';
                                             CONSTRAINT PK_Friends PRIMARY KEY (friend_id),
                                             CONSTRAINT UQ_Friends_Email UNIQUE (friend_email)
                                         )";
+                                        $data_query = "INSERT INTO friends (friend_email, password, profile_name, date_started, num_of_friends)
+                                            VALUES ('john.doe@example.com', 'password123', 'John Doe', '2025-01-01', 5),
+                                            ('jane.smith@example.com', 'securepass', 'Jane Smith', '2025-02-01', 8),
+                                            ('alice.jones@example.com', 'alice123', 'Alice Jones', '2025-03-01', 3),
+                                            ('bob.brown@example.com', 'bobsecure', 'Bob Brown', '2025-04-01', 7),
+                                            ('charlie.white@example.com', 'charliepass', 'Charlie White', '2025-05-01', 6),
+                                            ('david.green@example.com', 'david123', 'David Green', '2025-06-01', 4),
+                                            ('emma.black@example.com', 'emmapass', 'Emma Black', '2025-07-01', 9),
+                                            ('frank.gray@example.com', 'franksecure', 'Frank Gray', '2025-08-01', 2),
+                                            ('grace.blue@example.com', 'grace123', 'Grace Blue', '2025-09-01', 10),
+                                            ('hannah.red@example.com', 'hannahpass', 'Hannah Red', '2025-10-01', 1);
+                                        ";
                                     } elseif ($table == 'myfriends') {
                                         $create_query = "CREATE TABLE myfriends (
                                             friend_id1 INT NOT NULL,
@@ -105,12 +115,23 @@ require_once 'config.inc.php';
                                             CONSTRAINT FK_MyFriends_Friend1 FOREIGN KEY (friend_id1) REFERENCES friends(friend_id),
                                             CONSTRAINT FK_MyFriends_Friend2 FOREIGN KEY (friend_id2) REFERENCES friends(friend_id)
                                         )";
+                                        $data_query = "INSERT INTO myfriends (friend_id1, friend_id2)
+                                            VALUES (1, 2), (1, 3), (1, 4), (2, 5), (2, 6), (3, 7), (3, 8), (4, 9), (4, 10), (5, 1),
+                                            (6, 2), (7, 3), (8, 4), (9, 5), (10, 6), (1, 7), (2, 8), (3, 9), (4, 5), (5, 2);";
                                     }
 
+                                    // Execute the create table query
                                     if (mysqli_query($db_connection, $create_query)) {
                                         echo "<li class='text-success'>Table '$table' created successfully.</li>";
                                     } else {
-                                        echo "<p class='text-error'>Error creating table '$table': " . mysqli_error($db_connection) . "</p>";
+                                        die("<li class='text-error'>Error creating table '$table': " . mysqli_error($db_connection) . "</li>");
+                                    }
+
+                                    // Execute the data insertion query
+                                    if (mysqli_query($db_connection, $data_query)) {
+                                        echo "<li class='text-success'>Initial data inserted into '$table' successfully.</li>";
+                                    } else {
+                                        die("<li class='text-error'>Error inserting data into table '$table': " . mysqli_error($db_connection) . "</li>");
                                     }
                                 }
 
@@ -125,8 +146,3 @@ require_once 'config.inc.php';
                     </main>
                 </div>
             </div>
-        </div>
-    </div>
-</body>
-
-</html>
