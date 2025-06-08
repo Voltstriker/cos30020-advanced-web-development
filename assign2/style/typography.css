@@ -1,0 +1,52 @@
+@font-face {
+    font-family: "Roboto";
+    src:
+        url("./fonts/Roboto-Regular.ttf") format("truetype"),
+        url("./fonts/Roboto-Bold.ttf") format("truetype"),
+        url("./fonts/Roboto-Italic.ttf") format("truetype")
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Arial", sans-serif;
+    margin: 10px 0;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.text-italic {
+    font-style: italic;
+}
+
+.text-underline {
+    text-decoration: underline;
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.text-lowercase {
+    text-transform: lowercase;
+}
+
+.text-capitalize {
+    text-transform: capitalize;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}

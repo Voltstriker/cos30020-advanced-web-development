@@ -1,0 +1,70 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper  {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.banner {
+    border: 1px solid #000;
+    background: #ffa040;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.banner a, .banner a:visited, .banner a:active {
+    color: #1134f7;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    text-align:center;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+nav ul li a, nav ul li a:visited {
+    text-decoration: none;
+    color: #000;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+nav > .brand, nav > .user {
+    flex: 0 0 auto;
+}
+
+nav > .nav-pills {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
