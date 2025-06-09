@@ -26,11 +26,15 @@ body {
     justify-content: space-between;
 }
 
+.display-none {
+    display: none;
+}
+
 .banner {
     border: 1px solid #000;
-    background: #ffa040;
+    background: #f0f0f0;
     padding: 10px;
-    margin: 10px 0;
+    margin: 3px 0;
     flex: 0 0 auto;
 }
 
@@ -40,11 +44,33 @@ body {
     font-weight: bold;
 }
 
+.banner.banner-error {
+    background: #ff4040;
+}
+.banner.banner-success {
+    background: #40ff40;
+}
+.banner.banner-info {
+    background: #40a0ff;
+}
+.banner.banner-info p {
+    color: #000;
+}
+.banner.banner-warning {
+    background: #ffa040;
+}
+
 .site-content {
+    width: 100%;
+    height: 100%;
+}
+
+.panel {
+    display: flex;
     flex: 1 0 auto;
+    flex-direction: row;
     width: 100%;
     height: 100%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    flex: 1 0 auto;
-    flex-direction: row;
+    padding: 10px 15px;
 }

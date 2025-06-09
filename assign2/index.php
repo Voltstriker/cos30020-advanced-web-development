@@ -37,7 +37,7 @@ require_once 'config.inc.php';
                             <span>Jayden Earles | <a class="btn btn-primary" href="#">Logout</a></span>
                         </div>
                     </nav>
-                    <div class="col-12 banner">
+                    <div class="col-12 banner banner-warning">
                         <h2>Assignment 3: System development project 2</h2>
                         <p>The requirements for this assignment are listed in the <a href="assets/Assignment 3 System development project 2.pdf" target="_blank">worksheet document</a>.</p>
                         <br>
@@ -51,41 +51,52 @@ require_once 'config.inc.php';
                         </ul>
                         <p></p>
                     </div>
-                    <main class="col-12">
-                        <div class="row site-content">
-                            <?php
-                            // Connect to the database
-                            $db_connection = @mysqli_connect($hostname, $username, $password)
-                                or die("<p class='text-failure'>Unable to connect to the database server.</p>"
-                                    . "<p class='text-failure'>Error code " . mysqli_connect_errno()
-                                    . ": " . mysqli_connect_error()) . "</p>";
+                    <main class="site-content">
+                        <?php
+                        // Connect to the database
+                        $db_connection = @mysqli_connect($hostname, $username, $password)
+                            or die("<p class='text-failure'>Unable to connect to the database server.</p>"
+                                . "<p class='text-failure'>Error code " . mysqli_connect_errno()
+                                . ": " . mysqli_connect_error()) . "</p>";
 
-                            // Select the database
-                            if (!@mysqli_select_db($db_connection, $database)) {
-                                die("<p class='text-failure'>Unable to locate the '$database' database within the server.</p>");
+                        // Select the database
+                        if (!@mysqli_select_db($db_connection, $database)) {
+                            $db_connection_error = true;
+                        } else {
+                            $db_connection_error = false;
+                        }
+
+                        // Check if the database tables exist
+                        $tables = ['friends', 'myfriends'];
+                        $missing_tables = [];
+                        foreach ($tables as $table) {
+                            $query = "SHOW TABLES LIKE '$table'";
+                            $result = mysqli_query($db_connection, $query);
+                            if (mysqli_num_rows($result) == 0) {
+                                $missing_tables[] = $table;
                             }
+                        }
+                        ?>
 
-                            // Check if the database tables exist
-                            $tables = ['friends', 'myfriends'];
-                            $missing_tables = [];
-                            foreach ($tables as $table) {
-                                $query = "SHOW TABLES LIKE '$table'";
-                                $result = mysqli_query($db_connection, $query);
-                                if (mysqli_num_rows($result) == 0) {
-                                    $missing_tables[] = $table;
-                                }
-                            }
+                        <div class="container banner banner-info <?php if (!$db_connection_error && empty($missing_tables)) echo "display-none" ?>">
+                            <div class="row">
+                                <div class="col col-12">
+                                    <?php
+                                    // Display an error message if the database connection failed
+                                    if ($db_connection_error) {
+                                        die("<p class='text-failure'>Unable to locate the '$database' database within the server.</p>");
+                                    }
 
-                            // If any required tables are missing, display an error message
-                            // Afterwards, create the tables
-                            if (!empty($missing_tables)) {
-                                echo "<p class='text-error'>The following required tables are missing from the database: \""
-                                    . implode('", "', $missing_tables) . "\". Attempting to create the missing tables...</p><ul>";
+                                    // If any required tables are missing, display an error message
+                                    // Afterwards, create the tables
+                                    if (!empty($missing_tables)) {
+                                        echo "<p class='text-error'>The following required tables are missing from the database: \""
+                                            . implode('", "', $missing_tables) . "\". Attempting to create the missing tables...</p><ul>";
 
-                                // Create the missing tables
-                                foreach ($missing_tables as $table) {
-                                    if ($table == 'friends') {
-                                        $create_query = "CREATE TABLE friends (
+                                        // Create the missing tables
+                                        foreach ($missing_tables as $table) {
+                                            if ($table == 'friends') {
+                                                $create_query = "CREATE TABLE friends (
                                             `friend_id` INT NOT NULL AUTO_INCREMENT,
                                             `friend_email` VARCHAR(50) NOT NULL,
                                             `password` VARCHAR(20) NOT NULL,
@@ -95,7 +106,7 @@ require_once 'config.inc.php';
                                             CONSTRAINT PK_Friends PRIMARY KEY (friend_id),
                                             CONSTRAINT UQ_Friends_Email UNIQUE (friend_email)
                                         )";
-                                        $data_query = "INSERT INTO friends (friend_email, password, profile_name, date_started, num_of_friends)
+                                                $data_query = "INSERT INTO friends (friend_email, password, profile_name, date_started, num_of_friends)
                                             VALUES ('john.doe@example.com', 'password123', 'John Doe', '2025-01-01', 5),
                                             ('jane.smith@example.com', 'securepass', 'Jane Smith', '2025-02-01', 8),
                                             ('alice.jones@example.com', 'alice123', 'Alice Jones', '2025-03-01', 3),
@@ -107,41 +118,43 @@ require_once 'config.inc.php';
                                             ('grace.blue@example.com', 'grace123', 'Grace Blue', '2025-09-01', 10),
                                             ('hannah.red@example.com', 'hannahpass', 'Hannah Red', '2025-10-01', 1);
                                         ";
-                                    } elseif ($table == 'myfriends') {
-                                        $create_query = "CREATE TABLE myfriends (
+                                            } elseif ($table == 'myfriends') {
+                                                $create_query = "CREATE TABLE myfriends (
                                             friend_id1 INT NOT NULL,
                                             friend_id2 INT NOT NULL,
                                             CONSTRAINT PK_MyFriends PRIMARY KEY (friend_id1, friend_id2),
                                             CONSTRAINT FK_MyFriends_Friend1 FOREIGN KEY (friend_id1) REFERENCES friends(friend_id),
                                             CONSTRAINT FK_MyFriends_Friend2 FOREIGN KEY (friend_id2) REFERENCES friends(friend_id)
                                         )";
-                                        $data_query = "INSERT INTO myfriends (friend_id1, friend_id2)
+                                                $data_query = "INSERT INTO myfriends (friend_id1, friend_id2)
                                             VALUES (1, 2), (1, 3), (1, 4), (2, 5), (2, 6), (3, 7), (3, 8), (4, 9), (4, 10), (5, 1),
                                             (6, 2), (7, 3), (8, 4), (9, 5), (10, 6), (1, 7), (2, 8), (3, 9), (4, 5), (5, 2);";
+                                            }
+
+                                            // Execute the create table query
+                                            if (mysqli_query($db_connection, $create_query)) {
+                                                echo "<li>Table '$table' created successfully.</li>";
+                                            } else {
+                                                die("<li>Error creating table '$table': " . mysqli_error($db_connection) . "</li>");
+                                            }
+
+                                            // Execute the data insertion query
+                                            if (mysqli_query($db_connection, $data_query)) {
+                                                echo "<li>Initial data inserted into '$table' successfully.</li>";
+                                            } else {
+                                                die("<li>Error inserting data into table '$table': " . mysqli_error($db_connection) . "</li>");
+                                            }
+                                        }
+
+                                        echo "</ul>";
                                     }
 
-                                    // Execute the create table query
-                                    if (mysqli_query($db_connection, $create_query)) {
-                                        echo "<li class='text-success'>Table '$table' created successfully.</li>";
-                                    } else {
-                                        die("<li class='text-error'>Error creating table '$table': " . mysqli_error($db_connection) . "</li>");
-                                    }
-
-                                    // Execute the data insertion query
-                                    if (mysqli_query($db_connection, $data_query)) {
-                                        echo "<li class='text-success'>Initial data inserted into '$table' successfully.</li>";
-                                    } else {
-                                        die("<li class='text-error'>Error inserting data into table '$table': " . mysqli_error($db_connection) . "</li>");
-                                    }
-                                }
-
-                                echo "</ul>";
-                            }
-
-                            // Close the database connection
-                            mysqli_free_result($result);
-                            mysqli_close($db_connection);
-                            ?>
+                                    // Close the database connection
+                                    mysqli_free_result($result);
+                                    mysqli_close($db_connection);
+                                    ?>
+                                </div>
+                            </div>
                         </div>
                     </main>
                 </div>
