@@ -23,6 +23,49 @@ if (!@mysqli_select_db($db_connection, $database)) {
     $warnings[] = "Unable to select the database: $database.";
 }
 
+// Check if the form is submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Get the email and password from the form
+    $email = isset($_POST['email']) ? trim($_POST['email']) : '';
+    $password = isset($_POST['password']) ? trim($_POST['password']) : '';
+
+    // Validate the email and password
+    if (empty($email)) {
+        $warnings[] = "Email address is required.";
+    }
+    if (empty($password)) {
+        $warnings[] = "Password is required.";
+    }
+
+    // If there are no warnings, proceed to check the credentials
+    if (empty($warnings)) {
+        // Prepare the SQL statement to prevent SQL injection
+        $stmt = mysqli_prepare($db_connection, "SELECT profile_name FROM friends WHERE friend_email = ? AND password = ?");
+        mysqli_stmt_bind_param($stmt, 'ss', $email, $password);
+
+        // Execute the statement
+        mysqli_stmt_execute($stmt);
+
+        // Bind the result
+        mysqli_stmt_bind_result($stmt, $profile_name);
+
+        // Fetch the result
+        if (mysqli_stmt_fetch($stmt)) {
+            // Set session variables and mark user as logged in
+            $_SESSION['logged_in'] = true;
+            $_SESSION['profile_name'] = $profile_name;
+            $_SESSION['email'] = $email;
+            header('Location: friendlist.php');
+            exit();
+        } else {
+            $warnings[] = "Invalid email or password.";
+        }
+
+        // Close the statement
+        mysqli_stmt_close($stmt);
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
