@@ -162,7 +162,9 @@ require_once 'config.inc.php';
                                 <div class="col col-12">
                                     <h3>Welcome to RazorBook!</h3>
                                     <p>This is a sample application for the assignment. It demonstrates the use of PHP and MySQL to create a simple social networking platform.</p>
-                                    <p>Feel free to explore the features and functionalities provided in this application.</p>
+                                    <br>
+                                    <h4>User Login</h4>
+                                    <p>The navbar will show the currently logged in user - when a user is logged in, the login and sign up links will not display. Log out from the current user to make these links display.</p>
                                     <br>
                                     <h4>Database Management</h4>
                                     <p class="<?php if (isset($_POST['drop_tables'])) echo "display-none" ?>">You can use the button below to drop the tables.</p>
