@@ -1,31 +1,40 @@
 <?php
-// Import the MySQL connection details
-require_once 'config.inc.php';
-
 // Start the session
 session_start();
+
 
 // Initialize an array to hold warning messages
 $warnings = [];
 
+// Import the MySQL connection details and initialise the connection
+require_once 'config.inc.php';
+$db_connection = @mysqli_connect($hostname, $username, $password)
+    or $warnings = "Unable to connect to the database server. Error code " . mysqli_connect_errno()
+    . ": " . mysqli_connect_error();
+
+// Select the database
+if (!@mysqli_select_db($db_connection, $database)) {
+    $warnings[] = "Unable to select the database: $database.";
+}
+
 // Check if the form has been submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve and sanitize form inputs
-    $username = trim($_POST['username'] ?? '');
+    $profile_name = trim($_POST['profile_name'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
     $passwordConfirm = $_POST['password-confirm'] ?? '';
 
-    // Check if the username was submitted
-    if (empty($username)) {
-        $warnings[] = 'Username is required.';
+    // Check if the profile_name was submitted
+    if (empty($profile_name)) {
+        $warnings[] = 'profile_name is required.';
     }
-    // Check if the username contains only letters
-    elseif (!preg_match('/^[a-zA-Z]+$/', $username)) {
-        $warnings[] = 'Username may only contain letters.';
+    // Check if the profile_name contains only letters
+    elseif (!preg_match('/^[a-zA-Z]+$/', $profile_name)) {
+        $warnings[] = 'profile_name may only contain letters.';
     }
 
-    // Check if the username was submitted
+    // Check if the profile_name was submitted
     if (empty($email)) {
         $warnings[] = 'Email address is required.';
     }
@@ -33,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $warnings[] = 'Invalid email address format.';
     }
-    // Check if the username already exists in the database
+    // Check if the profile_name already exists in the database
     else {
         $query = "SELECT * FROM friends WHERE friend_email = '$email'";
         $result = mysqli_query($db_connection, $query);
@@ -56,8 +65,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     elseif ($password !== $passwordConfirm) {
         $warnings[] = 'Passwords do not match.';
     }
-}
 
+    // If there are no warnings, add the user details to session variables and database, before redirecting to the friendadd.php page
+    if (empty($warnings)) {
+        // Prepare the SQL statement to prevent SQL injection
+        $stmt = mysqli_prepare($db_connection, "INSERT INTO friends (profile_name, friend_email, password, date_started, num_of_friends) VALUES (?, ?, ?, ?, ?)");
+        $date = date('Y-m-d'); // Get the current date
+        $num_of_friends = 0; // Default number of friends
+        mysqli_stmt_bind_param($stmt, 'ssssi', $profile_name, $email, $password, $date, $num_of_friends);
+
+        // Execute the statement and check for success
+        if (mysqli_stmt_execute($stmt)) {
+            // Store user details in session variables
+            $_SESSION['profile_name'] = $profile_name;
+            $_SESSION['email'] = $email;
+            $_SESSION['logged_in'] = true;
+
+            // Redirect to the friendadd.php page
+            header('Location: friendadd.php');
+            exit();
+        } else {
+            $warnings[] = 'Error registering user. Please try again later.';
+        }
+
+        // Close the prepared statement
+        mysqli_stmt_close($stmt);
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -89,9 +123,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
                         </ul>
                         <div class="user">
-                            <span><a class="btn btn-primary" href="signup.php">Login</a> | <a class="btn btn-secondary" href="signup.php">Register</a></span>
+                            <?php
+                            // Check if the user is logged in
+                            if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+                                // Display the profile_name and logout link
+                                echo '<span class="user-name">' . htmlspecialchars($_SESSION['profile_name']) . '</span>';
+                                echo ' | <a class="btn btn-secondary" href="logout.php">Logout</a>';
+                            } else {
+                                // Display login and register buttons
+                                echo '<span><a class="btn btn-primary" href="signup.php">Login</a> | <a class="btn btn-secondary" href="signup.php">Register</a></span>';
+                            }
+                            ?>
                         </div>
                     </nav>
+
                     <div class="col-12 banner banner-warning <?php if (empty($warnings)) echo 'display-none' ?>">
                         <div class="row">
                             <div class="col col-12">
@@ -119,12 +164,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <p class="form-text">Please fill in the form below to create a new account.</p>
 
                                             <div class="input-group">
-                                                <label for="username">Username</label>
-                                                <input type="text" id="username" name="username" placeholder="Username" required autofocus>
+                                                <label for="profile_name">Profile Name</label>
+                                                <input type="text" id="profile_name" name="profile_name" placeholder="Profile Name" required autofocus <?php if (isset($profile_name)) echo 'value="' . htmlspecialchars($profile_name) . '"'; ?>>
                                             </div>
                                             <div class="input-group">
                                                 <label for="email">Email address</label>
-                                                <input type="email" id="email" name="email" placeholder="Email Address" required>
+                                                <input type="email" id="email" name="email" placeholder="Email Address" required <?php if (isset($email)) echo 'value="' . htmlspecialchars($email) . '"'; ?>>
                                             </div>
                                             <div class="input-group">
                                                 <label for="password">Password</label>

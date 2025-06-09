@@ -1,4 +1,7 @@
 <?php
+// Start the session
+session_start();
+
 // Import the MySQL connection details
 require_once 'config.inc.php';
 ?>
@@ -32,7 +35,17 @@ require_once 'config.inc.php';
                             <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
                         </ul>
                         <div class="user">
-                            <span><a class="btn btn-primary" href="signup.php">Login</a> | <a class="btn btn-secondary" href="signup.php">Register</a></span>
+                            <?php
+                            // Check if the user is logged in
+                            if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+                                // Display the profile_name and logout link
+                                echo '<span class="user-name">' . htmlspecialchars($_SESSION['profile_name']) . '</span>';
+                                echo ' | <a class="btn btn-secondary" href="logout.php">Logout</a>';
+                            } else {
+                                // Display login and register buttons
+                                echo '<span><a class="btn btn-primary" href="signup.php">Login</a> | <a class="btn btn-secondary" href="signup.php">Register</a></span>';
+                            }
+                            ?>
                         </div>
                     </nav>
                     <div class="col-12 banner banner-warning">
