@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <span class="brand-title">RazorBook</span>
                         </div>
                         <ul class="nav-pills">
-                            <li class="nav-item"><a class="nav-link active" href="index.php">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
                             <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
                         </ul>
                         <div class="user">
