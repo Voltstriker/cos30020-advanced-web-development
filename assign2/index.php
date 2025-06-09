@@ -28,7 +28,7 @@ require_once 'config.inc.php';
                             <span class="brand-title">RazorBook</span>
                         </div>
                         <ul class="nav-pills">
-                            <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="index.php">Home</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">About</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Help</a></li>
@@ -156,9 +156,51 @@ require_once 'config.inc.php';
                                 </div>
                             </div>
                         </div>
+
+                        <div class="container panel">
+                            <div class="row">
+                                <div class="col col-12">
+                                    <h3>Welcome to RazorBook!</h3>
+                                    <p>This is a sample application for the assignment. It demonstrates the use of PHP and MySQL to create a simple social networking platform.</p>
+                                    <p>Feel free to explore the features and functionalities provided in this application.</p>
+                                    <br>
+                                    <h4>Database Management</h4>
+                                    <p class="<?php if (isset($_POST['drop_tables'])) echo "display-none" ?>">You can use the button below to drop the tables.</p>
+
+                                    <!-- Drop Tables Button -->
+                                    <form method="post" action="index.php" onsubmit="return confirm('Are you sure you want to drop the database tables? This action cannot be undone.');" class="<?php if (isset($_POST['drop_tables'])) echo "display-none" ?>">
+                                        <button type="submit" name="drop_tables" class="btn btn-danger">Drop Database Tables</button>
+                                    </form>
+                                    <?php
+                                    if (isset($_POST['drop_tables'])) {
+                                        $db_connection = @mysqli_connect($hostname, $username, $password, $database)
+                                            or die("<p class='text-failure'>Unable to connect to the database server.</p>");
+                                        // Drop myfriends first due to FK constraint
+                                        $drop_myfriends = "DROP TABLE IF EXISTS myfriends";
+                                        $drop_friends = "DROP TABLE IF EXISTS friends";
+                                        $success = true;
+                                        if (!mysqli_query($db_connection, $drop_myfriends)) {
+                                            echo "<p class='text-error'>Failed to drop myfriends: " . mysqli_error($db_connection) . "</p>";
+                                            $success = false;
+                                        }
+                                        if (!mysqli_query($db_connection, $drop_friends)) {
+                                            echo "<p class='text-error'>Failed to drop friends: " . mysqli_error($db_connection) . "</p>";
+                                            $success = false;
+                                        }
+                                        if ($success) {
+                                            echo "<p class='text-success'>Tables <strong>myfriends</strong> and <strong>friends</strong> dropped successfully. Please <a href='index.php'>refresh the page</a> to trigger the recreation of the tables.</p>";
+                                        }
+                                        mysqli_close($db_connection);
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
                     </main>
                 </div>
             </div>
         </div>
     </div>
 </body>
+
+</html>
