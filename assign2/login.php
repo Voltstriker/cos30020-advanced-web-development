@@ -57,7 +57,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['email'] = $email;
             header('Location: friendlist.php');
             exit();
-        } else {
+        }
+        // Record not found or invalid credentials
+        else {
             $warnings[] = "Invalid email or password.";
         }
 
