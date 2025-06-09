@@ -33,6 +33,13 @@ require_once 'config.inc.php';
                         <ul class="nav-pills">
                             <li class="nav-item"><a class="nav-link active" href="index.php">Home</a></li>
                             <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
+                            <?php
+                            // Check if the user is logged in to display the appropriate links
+                            if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+                                echo '<li class="nav-item"><a class="nav-link" href="friendlist.php">Friend List</a></li>';
+                                echo '<li class="nav-item"><a class="nav-link" href="friendadd.php">Add Friend</a></li>';
+                            }
+                            ?>
                         </ul>
                         <div class="user">
                             <?php
