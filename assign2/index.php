@@ -29,12 +29,10 @@ require_once 'config.inc.php';
                         </div>
                         <ul class="nav-pills">
                             <li class="nav-item"><a class="nav-link active" href="index.php">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Help</a></li>
+                            <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
                         </ul>
                         <div class="user">
-                            <span>Jayden Earles | <a class="btn btn-primary" href="#">Logout</a></span>
+                            <span><a class="btn btn-primary" href="signup.php">Login</a> | <a class="btn btn-secondary" href="signup.php">Register</a></span>
                         </div>
                     </nav>
                     <div class="col-12 banner banner-warning">

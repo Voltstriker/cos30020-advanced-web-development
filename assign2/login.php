@@ -28,13 +28,11 @@ require_once 'config.inc.php';
                             <span class="brand-title">RazorBook</span>
                         </div>
                         <ul class="nav-pills">
-                            <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Help</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="index.php">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
                         </ul>
                         <div class="user">
-                            <span>Jayden Earles | <a class="btn btn-primary" href="#">Logout</a></span>
+                            <span><a class="btn btn-primary" href="signup.php">Login</a> | <a class="btn btn-secondary" href="signup.php">Register</a></span>
                         </div>
                     </nav>
                     <main class="col-12">
