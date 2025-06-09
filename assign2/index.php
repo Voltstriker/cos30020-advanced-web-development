@@ -185,7 +185,7 @@ require_once 'config.inc.php';
                                     <p>The navbar will show the currently logged in user - when a user is logged in, the login and sign up links will not display. Log out from the current user to make these links display.</p>
                                     <br>
                                     <h4>Database Management</h4>
-                                    <p class="<?php if (isset($_POST['drop_tables'])) echo "display-none" ?>">You can use the button below to drop the tables.</p>
+                                    <p class="<?php if (isset($_POST['drop_tables'])) echo "display-none" ?>">You can use the button below to drop the tables and reset the database.</p>
 
                                     <!-- Drop Tables Button -->
                                     <form method="post" action="index.php" onsubmit="return confirm('Are you sure you want to drop the database tables? This action cannot be undone.');" class="<?php if (isset($_POST['drop_tables'])) echo "display-none" ?>">
