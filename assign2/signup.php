@@ -87,6 +87,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['email'] = $email;
             $_SESSION['logged_in'] = true;
 
+            // Set the user ID in the session (this should be the last inserted ID)
+            $_SESSION['profile_id'] = mysqli_insert_id($db_connection);
+
             // Redirect to the friendadd.php page
             header('Location: friendadd.php');
             exit();
@@ -131,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             // Check if the user is logged in to display the appropriate links
                             if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                                 echo '<li class="nav-item"><a class="nav-link" href="friendlist.php">Friend List</a></li>';
-                                echo '<li class="nav-item"><a class="nav-link" href="friendadd.php">Add Friend</a></li>';
+                                echo '<li class="nav-item"><a class="nav-link" href="friendadd.php">Add Friends</a></li>';
                             }
                             ?>
                         </ul>

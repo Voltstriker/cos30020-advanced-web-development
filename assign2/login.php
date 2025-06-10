@@ -40,19 +40,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // If there are no warnings, proceed to check the credentials
     if (empty($warnings)) {
         // Prepare the SQL statement to prevent SQL injection
-        $stmt = mysqli_prepare($db_connection, "SELECT profile_name FROM friends WHERE friend_email = ? AND password = ?");
+        $stmt = mysqli_prepare($db_connection, "SELECT friend_id, profile_name FROM friends WHERE friend_email = ? AND password = ?");
         mysqli_stmt_bind_param($stmt, 'ss', $email, $password);
 
         // Execute the statement
         mysqli_stmt_execute($stmt);
 
-        // Bind the result
-        mysqli_stmt_bind_result($stmt, $profile_name);
+        // Bind the result to variables
+        mysqli_stmt_bind_result($stmt, $profile_id, $profile_name);
 
         // Fetch the result
         if (mysqli_stmt_fetch($stmt)) {
             // Set session variables and mark user as logged in
             $_SESSION['logged_in'] = true;
+            $_SESSION['profile_id'] = $profile_id;
             $_SESSION['profile_name'] = $profile_name;
             $_SESSION['email'] = $email;
             header('Location: friendlist.php');
@@ -101,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             // Check if the user is logged in to display the appropriate links
                             if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                                 echo '<li class="nav-item"><a class="nav-link" href="friendlist.php">Friend List</a></li>';
-                                echo '<li class="nav-item"><a class="nav-link" href="friendadd.php">Add Friend</a></li>';
+                                echo '<li class="nav-item"><a class="nav-link" href="friendadd.php">Add Friends</a></li>';
                             }
                             ?>
                         </ul>
