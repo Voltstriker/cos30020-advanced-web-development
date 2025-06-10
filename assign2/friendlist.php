@@ -122,7 +122,7 @@ if (!@mysqli_select_db($db_connection, $database)) {
                                             $friend_id2 = urlencode($row['friend_id2']);
                                             echo '<tr>';
                                             echo '<td>' . $friend_name . '</td>';
-                                            echo '<td><a class="btn btn-primary" href="functions/unfriend.php?friend_id2=' . $friend_id2 . '">Unfriend</a></td>';
+                                            echo '<td><a class="btn btn-primary" href="functions/unfriend.php?friend_id=' . $friend_id2 . '">Unfriend</a></td>';
                                             echo '</tr>';
                                         }
                                     } else {
