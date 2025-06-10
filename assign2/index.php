@@ -37,7 +37,7 @@ require_once 'config.inc.php';
                             // Check if the user is logged in to display the appropriate links
                             if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                                 echo '<li class="nav-item"><a class="nav-link" href="friendlist.php">Friend List</a></li>';
-                                echo '<li class="nav-item"><a class="nav-link" href="friendadd.php">Add Friend</a></li>';
+                                echo '<li class="nav-item"><a class="nav-link" href="friendadd.php">Add Friends</a></li>';
                             }
                             ?>
                         </ul>

@@ -33,7 +33,7 @@ if (!@mysqli_select_db($db_connection, $database)) {
     <meta name="description" content="Web Programming :: Assignment 3: System development project 2" />
     <meta name="keywords" content="Web,programming" />
     <meta name="author" content="Jayden Earles" />
-    <title>Friend List | Assignment 3: System development project 2</title>
+    <title>Add Friends | Assignment 3: System development project 2</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="site.css" />
@@ -55,8 +55,8 @@ if (!@mysqli_select_db($db_connection, $database)) {
                             <?php
                             // Check if the user is logged in to display the appropriate links
                             if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-                                echo '<li class="nav-item"><a class="nav-link active" href="friendlist.php">Friend List</a></li>';
-                                echo '<li class="nav-item"><a class="nav-link" href="friendadd.php">Add Friends</a></li>';
+                                echo '<li class="nav-item"><a class="nav-link" href="friendlist.php">Friend List</a></li>';
+                                echo '<li class="nav-item"><a class="nav-link active" href="friendadd.php">Add Friends</a></li>';
                             }
                             ?>
                         </ul>
@@ -99,34 +99,58 @@ if (!@mysqli_select_db($db_connection, $database)) {
                                     <h2>Friend List</h2>
                                     <?php
                                     // Display welcome message
-                                    echo '<p>Welcome, ' . htmlspecialchars($_SESSION['profile_name']) . '! Here is your friend list:</p>';
+                                    echo '<p>Welcome, ' . htmlspecialchars($_SESSION['profile_name']) . '! Here is a list of users you may add as a friend:</p>';
 
-                                    // Fetch and display the user's friends from the database
+                                    // Fetch the user's friends from the database
                                     $email = $_SESSION['email'];
-                                    $query = "SELECT * FROM myfriends INNER JOIN friends ON myfriends.friend_id1 = friends.friend_id WHERE friends.friend_email = '$email'";
-                                    $result = mysqli_query($db_connection, $query);
+                                    $profile_id = $_SESSION['profile_id'];
 
-                                    // Display the friends in a table
+                                    // Get all friend IDs that the user is already friends with
+                                    $user_friends = [];
+                                    $friend_query = "SELECT friend_id2 FROM myfriends WHERE friend_id1 = ?";
+                                    $stmt = mysqli_prepare($db_connection, $friend_query);
+                                    mysqli_stmt_bind_param($stmt, "i", $profile_id);
+                                    mysqli_stmt_execute($stmt);
+                                    mysqli_stmt_bind_result($stmt, $friend_id2);
+                                    while (mysqli_stmt_fetch($stmt)) {
+                                        $user_friends[] = $friend_id2;
+                                    }
+                                    mysqli_stmt_close($stmt);
+
+                                    // Prepare a string of friend IDs for exclusion
+                                    $exclude_ids = $user_friends;
+                                    $exclude_ids[] = $profile_id; // Exclude self
+                                    $placeholders = implode(',', array_fill(0, count($exclude_ids), '?'));
+
+                                    // Fetch users who are not already friends and not the current user
+                                    $sql = "SELECT friend_id, profile_name FROM friends WHERE friend_id NOT IN ($placeholders)";
+                                    $stmt = mysqli_prepare($db_connection, $sql);
+
+                                    // Dynamically bind parameters
+                                    $types = str_repeat('i', count($exclude_ids));
+                                    mysqli_stmt_bind_param($stmt, $types, ...$exclude_ids);
+                                    mysqli_stmt_execute($stmt);
+                                    $result = mysqli_stmt_get_result($stmt);
+
+                                    // Display the potential friends in a table
                                     echo '<table class="friend-table">';
                                     echo '<thead><tr><th>Friend Name</th>' . '<th>Action</th>' . '</tr></thead>';
                                     echo '<tbody>';
 
-                                    // Check if the query was successful and if there are any friends
+                                    // Check if the query was successful and if there are any potential friends
                                     if ($result && mysqli_num_rows($result) > 0) {
-                                        echo '<p>You have <span class="text-bold">' . mysqli_num_rows($result) . '</span> friend(s).</p>';
-
+                                        echo '<p>You have <span class="text-bold">' . mysqli_num_rows($result) . '</span> potential friend(s).</p>';
+                                        // Loop through the results and display each potential friend
                                         while ($row = mysqli_fetch_assoc($result)) {
-                                            $query = "SELECT profile_name FROM friends WHERE friend_id = " . $row['friend_id2'];
-                                            $friend_result = mysqli_fetch_assoc(mysqli_query($db_connection, $query));
-                                            $friend_name = htmlspecialchars($friend_result['profile_name']);
-                                            $friend_id2 = urlencode($row['friend_id2']);
+                                            $friend_name = htmlspecialchars($row['profile_name']);
+                                            $friend_id = urlencode($row['friend_id']);
                                             echo '<tr>';
                                             echo '<td>' . $friend_name . '</td>';
-                                            echo '<td><a class="btn btn-primary" href="functions/unfriend.php?friend_id2=' . $friend_id2 . '">Unfriend</a></td>';
+                                            echo '<td><a class="btn btn-primary" href="functions/addfriend.php?friend_id=' . $friend_id . '">Add Friend</a></td>';
                                             echo '</tr>';
                                         }
                                     } else {
-                                        echo '<td>You have no friends yet.</td><td><a class="btn btn-primary" href="friendadd.php">Add some!</a></td>';
+                                        echo '<td>You are friends with all registered users - you are a social butterfly!';
                                     }
                                     echo '</tbody>';
                                     echo '</table>';
