@@ -82,6 +82,7 @@ session_start();
                                     <ul>
                                         <li>Some very basic "security", where if the user is not logged in they will not be able to call functions that would impact a specific user, i.e. adding/removing friends</li>
                                         <li>Error handling, where if the user tries to add a friend that does not exist, it will not crash the site</li>
+                                        <li>Ability to reset the database to its default state, resetting the data back to the original records</li>
                                         <li>Basic styling to make the site look a little more appealing</li>
                                         <li>Modular css styling, where the css code has been broken into individual files and imported into a primary file</li>
                                         <li>Dynamic warning panel, where an array of warnings can be assigned to an array and displayed on the page</li>
