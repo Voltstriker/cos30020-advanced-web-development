@@ -124,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="row">
                     <nav class="col-12 nav">
                         <div class="brand brand-logo">
-                            <img src="images/Razor.png" alt="RazorBook Logo" class="brand-image" />
+                            <img src="images/razor.png" alt="RazorBook Logo" class="brand-image" />
                             <a class="brand-title" href="index.php">RazorBook</a>
                         </div>
                         <ul class="nav-pills">
