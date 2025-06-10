@@ -21,6 +21,12 @@ p {
     margin: 1em 0;
 }
 
+a {
+    color: #e53935;
+    text-decoration: none;
+    font-weight: normal;
+}
+
 .text-bold {
     font-weight: bold;
 }
