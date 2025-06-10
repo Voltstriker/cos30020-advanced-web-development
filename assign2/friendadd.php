@@ -69,7 +69,7 @@ if (!@mysqli_select_db($db_connection, $database)) {
                                 echo ' | <a class="btn btn-secondary" href="logout.php">Logout</a>';
                             } else {
                                 // Display login and register buttons
-                                echo '<span><a class="btn btn-primary" href="login.php">Login</a> | <a class="btn btn-secondary" href="signup.php">Register</a></span>';
+                                echo '<span><a class="btn btn-primary" href="login.php">Login</a> <a class="btn btn-secondary" href="signup.php">Register</a></span>';
                             }
                             ?>
                         </div>
