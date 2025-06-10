@@ -16,9 +16,9 @@
 .pagination .page-link {
     display: block;
     padding: 6px 14px;
-    color: #007bff;
+    color: #e53935;
     background: #fff;
-    border: 1px solid #dee2e6;
+    border: 1px solid #e53935;
     border-radius: 4px;
     text-decoration: none;
     transition: background 0.2s, color 0.2s;
@@ -26,14 +26,14 @@
 
 .pagination .page-item.active .page-link,
 .pagination .page-link:hover {
-    background: #007bff;
+    background: #e53935;
     color: #fff;
-    border-color: #007bff;
+    border-color: #e53935;
 }
 
 .pagination .page-item.disabled .page-link {
     color: #6c757d;
     background: #f8f9fa;
-    border-color: #dee2e6;
+    border-color: #e53935;
     cursor: not-allowed;
 }
