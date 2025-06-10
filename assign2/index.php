@@ -125,16 +125,16 @@ require_once 'config.inc.php';
                                             CONSTRAINT UQ_Friends_Email UNIQUE (friend_email)
                                         )";
                                                 $data_query = "INSERT INTO friends (friend_email, password, profile_name, date_started, num_of_friends)
-                                            VALUES ('john.doe@gmail.com', 'password123', 'John Doe', '2025-01-01', 5),
-                                            ('jane.smith@gmail.com', 'securepass', 'Jane Smith', '2025-02-01', 8),
-                                            ('alice.jones@gmail.com', 'alice123', 'Alice Jones', '2025-03-01', 3),
-                                            ('bob.brown@gmail.com', 'bobsecure', 'Bob Brown', '2025-04-01', 7),
-                                            ('charlie.white@gmail.com', 'charliepass', 'Charlie White', '2025-05-01', 6),
-                                            ('david.green@gmail.com', 'david123', 'David Green', '2025-06-01', 4),
-                                            ('emma.black@gmail.com', 'emmapass', 'Emma Black', '2025-07-01', 9),
-                                            ('frank.gray@gmail.com', 'franksecure', 'Frank Gray', '2025-08-01', 2),
-                                            ('grace.blue@gmail.com', 'grace123', 'Grace Blue', '2025-09-01', 10),
-                                            ('hannah.red@gmail.com', 'hannahpass', 'Hannah Red', '2025-10-01', 1);
+                                            VALUES ('john.doe@gmail.com', 'password123', 'John', '2025-01-01', 5),
+                                            ('jane.smith@gmail.com', 'securepass', 'Jane', '2025-02-01', 8),
+                                            ('alice.jones@gmail.com', 'alice123', 'Alice', '2025-03-01', 3),
+                                            ('bob.brown@gmail.com', 'bobsecure', 'Bob', '2025-04-01', 7),
+                                            ('charlie.white@gmail.com', 'charliepass', 'Charlie', '2025-05-01', 6),
+                                            ('david.green@gmail.com', 'david123', 'David', '2025-06-01', 4),
+                                            ('emma.black@gmail.com', 'emmapass', 'Emma', '2025-07-01', 9),
+                                            ('frank.gray@gmail.com', 'franksecure', 'Frank', '2025-08-01', 2),
+                                            ('grace.blue@gmail.com', 'grace123', 'Grace', '2025-09-01', 10),
+                                            ('hannah.red@gmail.com', 'hannahpass', 'Hannah', '2025-10-01', 1);
                                         ";
                                             } elseif ($table == 'myfriends') {
                                                 $create_query = "CREATE TABLE IF NOT EXISTS `myfriends` (
