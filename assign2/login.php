@@ -91,8 +91,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="container wrapper-content">
                 <div class="row">
                     <nav class="col-12 nav">
-                        <div class="brand">
-                            <span class="brand-image"></span>
+                        <div class="brand brand-logo">
+                            <img src="images/Razor.png" alt="RazorBook Logo" class="brand-image" />
                             <span class="brand-title">RazorBook</span>
                         </div>
                         <ul class="nav-pills">

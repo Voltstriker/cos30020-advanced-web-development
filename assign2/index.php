@@ -26,8 +26,8 @@ require_once 'config.inc.php';
             <div class="container wrapper-content">
                 <div class="row">
                     <nav class="col-12 nav">
-                        <div class="brand">
-                            <span class="brand-image"></span>
+                        <div class="brand brand-logo">
+                            <img src="images/Razor.png" alt="RazorBook Logo" class="brand-image" />
                             <span class="brand-title">RazorBook</span>
                         </div>
                         <ul class="nav-pills">
@@ -47,7 +47,7 @@ require_once 'config.inc.php';
                             if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                                 // Display the profile_name and logout link
                                 echo '<span class="user-name">' . htmlspecialchars($_SESSION['profile_name']) . '</span>';
-                                echo '<a class="btn btn-secondary" href="logout.php">Logout</a>';
+                                echo ' <a class="btn btn-secondary" href="logout.php">Logout</a>';
                             } else {
                                 // Display login and register buttons
                                 echo '<span><a class="btn btn-primary" href="login.php">Login</a> <a class="btn btn-secondary" href="signup.php">Register</a></span>';
