@@ -44,7 +44,7 @@ session_start();
                             if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                                 // Display the profile_name and logout link
                                 echo '<span class="user-name">' . htmlspecialchars($_SESSION['profile_name']) . '</span>';
-                                echo ' | <a class="btn btn-secondary" href="logout.php">Logout</a>';
+                                echo ' <a class="btn btn-secondary" href="logout.php">Logout</a>';
                             } else {
                                 // Display login and register buttons
                                 echo '<span><a class="btn btn-primary" href="login.php">Login</a> <a class="btn btn-secondary" href="signup.php">Register</a></span>';
@@ -87,6 +87,7 @@ session_start();
                                         <li>Dynamic warning panel, where an array of warnings can be assigned to an array and displayed on the page</li>
                                         <li>Dynamic navigation bar, where the links displayed change based on whether the user is logged in or not</li>
                                         <li>Dynamic user profile, where the user's name is displayed in the navigation bar when logged in</li>
+                                        <li>Added pagination to the friends list, as well as the add friends table that was required by the extra task</li>
                                     </ul>
                                     <p>The only section that required some consideration was how best to implement the add/remove friend system. I ended up deciding on a dedicated function to facilitate the action, which would be called via a button/link on the actual page itself.</p>
                                     <p>Looking back, I would have liked to spend more time on the site styling to make it more appealing as a website. Additionally, greater modularisation of my code would be a focus, moving as much as possible into reusable functions.</p>

@@ -66,7 +66,7 @@ if (!@mysqli_select_db($db_connection, $database)) {
                             if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                                 // Display the profile_name and logout link
                                 echo '<span class="user-name">' . htmlspecialchars($_SESSION['profile_name']) . '</span>';
-                                echo ' | <a class="btn btn-secondary" href="logout.php">Logout</a>';
+                                echo ' <a class="btn btn-secondary" href="logout.php">Logout</a>';
                             } else {
                                 // Display login and register buttons
                                 echo '<span><a class="btn btn-primary" href="login.php">Login</a> <a class="btn btn-secondary" href="signup.php">Register</a></span>';
@@ -101,28 +101,53 @@ if (!@mysqli_select_db($db_connection, $database)) {
                                     // Display welcome message
                                     echo '<p>Welcome, ' . htmlspecialchars($_SESSION['profile_name']) . '! Here is your friend list:</p>';
 
-                                    // Fetch and display the user's friends from the database
-                                    $email = $_SESSION['email'];
-                                    $query = "SELECT * FROM myfriends INNER JOIN friends ON myfriends.friend_id1 = friends.friend_id WHERE friends.friend_email = '$email'";
-                                    $result = mysqli_query($db_connection, $query);
+                                    // Fetch the user's profile_id
+                                    $profile_id = $_SESSION['profile_id'];
+
+                                    // Pagination setup
+                                    $per_page = 5;
+                                    $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+                                    if ($page < 1) $page = 1;
+
+                                    // Count total friends
+                                    $sql_count = "SELECT COUNT(*) FROM myfriends WHERE friend_id1 = ?";
+                                    $stmt_count = mysqli_prepare($db_connection, $sql_count);
+                                    mysqli_stmt_bind_param($stmt_count, "i", $profile_id);
+                                    mysqli_stmt_execute($stmt_count);
+                                    mysqli_stmt_bind_result($stmt_count, $total_friends);
+                                    mysqli_stmt_fetch($stmt_count);
+                                    mysqli_stmt_close($stmt_count);
+
+                                    $total_pages = max(1, ceil($total_friends / $per_page));
+                                    if ($page > $total_pages) $page = $total_pages;
+                                    $offset = ($page - 1) * $per_page;
+
+                                    // Fetch friends with pagination
+                                    $sql = "SELECT f.profile_name, f.friend_id
+                                            FROM myfriends m
+                                            INNER JOIN friends f ON m.friend_id2 = f.friend_id
+                                            WHERE m.friend_id1 = ?
+                                            ORDER BY f.profile_name ASC
+                                            LIMIT ? OFFSET ?";
+                                    $stmt = mysqli_prepare($db_connection, $sql);
+                                    mysqli_stmt_bind_param($stmt, "iii", $profile_id, $per_page, $offset);
+                                    mysqli_stmt_execute($stmt);
+                                    $result = mysqli_stmt_get_result($stmt);
 
                                     // Display the friends in a table
-                                    echo '<table class="friend-table">';
-                                    echo '<thead><tr><th>Friend Name</th>' . '<th>Action</th>' . '</tr></thead>';
+                                    echo '<div></div><table id="friend-table">';
+                                    echo '<thead><tr><th>Friend Name</th><th>Action</th></tr></thead>';
                                     echo '<tbody>';
 
                                     // Check if the query was successful and if there are any friends
                                     if ($result && mysqli_num_rows($result) > 0) {
-                                        echo '<p>You have <span class="text-bold">' . mysqli_num_rows($result) . '</span> friend(s).</p>';
-
+                                        echo '<p>You have <span class="text-bold">' . $total_friends . '</span> friend(s).</p>';
                                         while ($row = mysqli_fetch_assoc($result)) {
-                                            $query = "SELECT profile_name FROM friends WHERE friend_id = " . $row['friend_id2'] . " ORDER BY profile_name";
-                                            $friend_result = mysqli_fetch_assoc(mysqli_query($db_connection, $query));
-                                            $friend_name = htmlspecialchars($friend_result['profile_name']);
-                                            $friend_id2 = urlencode($row['friend_id2']);
+                                            $friend_name = htmlspecialchars($row['profile_name']);
+                                            $friend_id2 = urlencode($row['friend_id']);
                                             echo '<tr>';
                                             echo '<td>' . $friend_name . '</td>';
-                                            echo '<td><a class="btn btn-primary" href="functions/unfriend.php?friend_id=' . $friend_id2 . '">Unfriend</a></td>';
+                                            echo '<td class="text-center"><a class="btn btn-primary" href="functions/unfriend.php?friend_id=' . $friend_id2 . '">Unfriend</a></td>';
                                             echo '</tr>';
                                         }
                                     } else {
@@ -130,6 +155,33 @@ if (!@mysqli_select_db($db_connection, $database)) {
                                     }
                                     echo '</tbody>';
                                     echo '</table>';
+
+                                    // Pagination controls
+                                    if ($total_pages > 1) {
+                                        echo '<div class="pagination-nav" style="margin-top:1em;"><ul class="pagination">';
+                                        // Previous button
+                                        if ($page > 1) {
+                                            echo '<li class="page-item"><a class="page-link" href="?page=' . ($page - 1) . '">&laquo; Previous</a></li>';
+                                        } else {
+                                            echo '<li class="page-item disabled"><span class="page-link">&laquo; Previous</span></li>';
+                                        }
+                                        // Page numbers
+                                        for ($i = 1; $i <= $total_pages; $i++) {
+                                            if ($i == $page) {
+                                                echo '<li class="page-item active"><span class="page-link">' . $i . '</span></li>';
+                                            } else {
+                                                echo '<li class="page-item"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+                                            }
+                                        }
+                                        // Next button
+                                        if ($page < $total_pages) {
+                                            echo '<li class="page-item"><a class="page-link" href="?page=' . ($page + 1) . '">Next &raquo;</a></li>';
+                                        } else {
+                                            echo '<li class="page-item disabled"><span class="page-link">Next &raquo;</span></li>';
+                                        }
+                                        echo '</ul></div>';
+                                    }
+                                    echo '</div>';
                                     ?>
                                 </div>
                             </div>
@@ -140,3 +192,5 @@ if (!@mysqli_select_db($db_connection, $database)) {
         </div>
     </div>
 </body>
+
+</html>

@@ -66,7 +66,7 @@ if (!@mysqli_select_db($db_connection, $database)) {
                             if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                                 // Display the profile_name and logout link
                                 echo '<span class="user-name">' . htmlspecialchars($_SESSION['profile_name']) . '</span>';
-                                echo ' | <a class="btn btn-secondary" href="logout.php">Logout</a>';
+                                echo ' <a class="btn btn-secondary" href="logout.php">Logout</a>';
                             } else {
                                 // Display login and register buttons
                                 echo '<span><a class="btn btn-primary" href="login.php">Login</a> <a class="btn btn-secondary" href="signup.php">Register</a></span>';
@@ -182,7 +182,7 @@ if (!@mysqli_select_db($db_connection, $database)) {
                                                 echo '<tr>';
                                                 echo '<td>' . $friend_name . '</td>';
                                                 echo '<td>' . $mutual_count . '</td>';
-                                                echo '<td><a class="btn btn-primary" href="functions/addfriend.php?friend_id=' . urlencode($friend_id) . '">Add Friend</a></td>';
+                                                echo '<td class="text-center"><a class="btn btn-primary" href="functions/addfriend.php?friend_id=' . urlencode($friend_id) . '">Add Friend</a></td>';
                                                 echo '</tr>';
                                             }
                                         } else {
