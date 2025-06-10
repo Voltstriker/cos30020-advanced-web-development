@@ -14,7 +14,7 @@ require_once 'config.inc.php';
     <meta name="description" content="Web Programming :: Assignment 3: System development project 2" />
     <meta name="keywords" content="Web,programming" />
     <meta name="author" content="Jayden Earles" />
-    <title>Assignment 3: System development project 2</title>
+    <title>Index | Assignment 3: System development project 2</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="site.css" />
