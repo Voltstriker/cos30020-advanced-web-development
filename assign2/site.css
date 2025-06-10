@@ -5,3 +5,8 @@
 @import 'style/forms.css';
 @import 'style/buttons.css';
 @import 'style/tables.css';
+@import 'style/pagination.css';
+
+#friend-table {
+    margin: 0 auto;
+}
