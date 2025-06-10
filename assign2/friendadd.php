@@ -123,7 +123,7 @@ if (!@mysqli_select_db($db_connection, $database)) {
                                     $placeholders = implode(',', array_fill(0, count($exclude_ids), '?'));
 
                                     // Fetch users who are not already friends and not the current user
-                                    $sql = "SELECT friend_id, profile_name FROM friends WHERE friend_id NOT IN ($placeholders)";
+                                    $sql = "SELECT friend_id, profile_name FROM friends WHERE friend_id NOT IN ($placeholders) ORDER BY profile_name ASC";
                                     $stmt = mysqli_prepare($db_connection, $sql);
 
                                     // Dynamically bind parameters
