@@ -68,3 +68,7 @@ p {
 .text-success {
     color: green;
 }
+
+.text-highlight {
+    color: #e53935;
+}

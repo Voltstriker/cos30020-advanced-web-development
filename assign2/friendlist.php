@@ -141,7 +141,7 @@ if (!@mysqli_select_db($db_connection, $database)) {
 
                                     // Check if the query was successful and if there are any friends
                                     if ($result && mysqli_num_rows($result) > 0) {
-                                        echo '<p>You have <span class="text-bold">' . $total_friends . '</span> friend(s).</p>';
+                                        echo '<p>You have <span class="text-bold text-highlight">' . $total_friends . '</span> friend(s).</p>';
                                         while ($row = mysqli_fetch_assoc($result)) {
                                             $friend_name = htmlspecialchars($row['profile_name']);
                                             $friend_id2 = urlencode($row['friend_id']);

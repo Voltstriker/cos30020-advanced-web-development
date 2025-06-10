@@ -159,7 +159,7 @@ if (!@mysqli_select_db($db_connection, $database)) {
 
                                         // Check if the query was successful and if there are any potential friends
                                         if ($result && mysqli_num_rows($result) > 0) {
-                                            echo '<p>You have <span class="text-bold">' . $total_potential . '</span> potential friend(s).</p>';
+                                            echo '<p>You have <span class="text-bold text-highlight">' . $total_potential . '</span> potential friend(s).</p>';
                                             // Loop through the results and display each potential friend
                                             while ($row = mysqli_fetch_assoc($result)) {
                                                 $friend_name = htmlspecialchars($row['profile_name']);
