@@ -39,25 +39,15 @@ body {
 }
 
 .banner a, .banner a:visited, .banner a:active {
-    color: #1134f7;
+    color: #ffd600;
     text-decoration: underline;
     font-weight: bold;
 }
 
-.banner.banner-error {
-    background: #ff4040;
-}
-.banner.banner-success {
-    background: #40ff40;
-}
-.banner.banner-info {
-    background: #40a0ff;
-}
-.banner.banner-info p {
-    color: #000;
-}
 .banner.banner-warning {
-    background: #ffa040;
+    background: #e53935;
+    color: #fff;
+    border-color: #d32f2f;
 }
 
 .site-content {
