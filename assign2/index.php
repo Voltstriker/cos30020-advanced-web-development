@@ -212,7 +212,7 @@ require_once 'config.inc.php';
                                             $success = false;
                                         }
                                         if ($success) {
-                                            echo "<p class='text-success'>Tables <strong>myfriends</strong> and <strong>friends</strong> dropped successfully. Please <a href='index.php'>refresh the page</a> to trigger the recreation of the tables.</p>";
+                                            echo "<p>Tables <span class='text-bold text-highlight'>myfriends</span> and <span class='text-bold text-highlight'>friends</span> dropped successfully. Please <a href='index.php'>refresh the page</a> to trigger the recreation of the tables.</p>";
                                         }
                                         mysqli_close($db_connection);
                                     }
