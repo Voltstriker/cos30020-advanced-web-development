@@ -25,9 +25,9 @@
 
 .btn-primary:hover,
 .btn-primary:focus {
-    background-color: #b71c1c;
-    border-color: #b71c1c;
-    color: #fff;
+    background-color: #fff;
+    border-color: #e53935;
+    color: #111;
 }
 
 /* Secondary button */
@@ -39,7 +39,7 @@
 
 .btn-secondary:hover,
 .btn-secondary:focus {
-    background-color: #e53935;
+    background-color: #111;
     border-color: #e53935;
     color: #fff;
 }
