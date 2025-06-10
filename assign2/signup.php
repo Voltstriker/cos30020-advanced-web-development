@@ -26,10 +26,10 @@ if (!@mysqli_select_db($db_connection, $database)) {
 // Check if the form has been submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve and sanitize form inputs
-    $profile_name = trim($_POST['profile_name'] ?? '');
-    $email = trim($_POST['email'] ?? '');
-    $password = $_POST['password'] ?? '';
-    $passwordConfirm = $_POST['password-confirm'] ?? '';
+    $profile_name = trim($_POST['profile_name']);
+    $email = trim($_POST['email']);
+    $password = $_POST['password'];
+    $passwordConfirm = $_POST['password-confirm'];
 
     // Check if the profile_name was submitted
     if (empty($profile_name)) {

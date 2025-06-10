@@ -133,7 +133,13 @@ if (!@mysqli_select_db($db_connection, $database)) {
                                         $sql_count = "SELECT COUNT(*) FROM friends WHERE friend_id NOT IN ($placeholders)";
                                         $stmt_count = mysqli_prepare($db_connection, $sql_count);
                                         $types = str_repeat('i', count($exclude_ids));
-                                        mysqli_stmt_bind_param($stmt_count, $types, ...$exclude_ids);
+                                        // Prepare parameters as references for call_user_func_array
+                                        $bind_params = [];
+                                        $bind_params[] = &$types;
+                                        foreach ($exclude_ids as $key => $value) {
+                                            $bind_params[] = &$exclude_ids[$key];
+                                        }
+                                        call_user_func_array([$stmt_count, 'bind_param'], $bind_params);
                                         mysqli_stmt_execute($stmt_count);
                                         mysqli_stmt_bind_result($stmt_count, $total_potential);
                                         mysqli_stmt_fetch($stmt_count);
@@ -148,7 +154,13 @@ if (!@mysqli_select_db($db_connection, $database)) {
                                         $stmt = mysqli_prepare($db_connection, $sql);
                                         $types_pag = $types . "ii";
                                         $params = array_merge($exclude_ids, [$per_page, $offset]);
-                                        mysqli_stmt_bind_param($stmt, $types_pag, ...$params);
+                                        // Prepare parameters as references for call_user_func_array
+                                        $bind_params_pag = [];
+                                        $bind_params_pag[] = &$types_pag;
+                                        foreach ($params as $key => $value) {
+                                            $bind_params_pag[] = &$params[$key];
+                                        }
+                                        call_user_func_array([$stmt, 'bind_param'], $bind_params_pag);
                                         mysqli_stmt_execute($stmt);
                                         $result = mysqli_stmt_get_result($stmt);
 
