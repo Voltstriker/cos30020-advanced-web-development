@@ -123,7 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="col-12 banner banner-warning <?php if (empty($warnings)) echo 'display-none' ?>">
                         <div class="row">
                             <div class="col col-12">
-                                <h4>There were some issues when submitting the registration form:</h4>
+                                <h4>There were some issues when logging in:</h4>
                                 <?php
                                 // Display warning messages if any
                                 if (!empty($warnings)) {
