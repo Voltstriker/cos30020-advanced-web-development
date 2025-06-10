@@ -113,40 +113,44 @@ require_once 'config.inc.php';
 
                                         // Create the missing tables
                                         foreach ($missing_tables as $table) {
+                                            // Create the friends table with dummy data
                                             if ($table == 'friends') {
                                                 $create_query = "CREATE TABLE IF NOT EXISTS `friends` (
-                                            `friend_id` INT NOT NULL AUTO_INCREMENT,
-                                            `friend_email` VARCHAR(50) NOT NULL,
-                                            `password` VARCHAR(20) NOT NULL,
-                                            `profile_name` VARCHAR(30) NOT NULL,
-                                            `date_started` DATE NOT NULL,
-                                            `num_of_friends` INT UNSIGNED NOT NULL DEFAULT 0,
-                                            CONSTRAINT PK_Friends PRIMARY KEY (friend_id),
-                                            CONSTRAINT UQ_Friends_Email UNIQUE (friend_email)
-                                        )";
+                                                `friend_id` INT NOT NULL AUTO_INCREMENT,
+                                                `friend_email` VARCHAR(50) NOT NULL,
+                                                `password` VARCHAR(20) NOT NULL,
+                                                `profile_name` VARCHAR(30) NOT NULL,
+                                                `date_started` DATE NOT NULL,
+                                                `num_of_friends` INT UNSIGNED NOT NULL DEFAULT 0,
+                                                CONSTRAINT PK_Friends PRIMARY KEY (friend_id),
+                                                CONSTRAINT UQ_Friends_Email UNIQUE (friend_email))";
+
                                                 $data_query = "INSERT INTO friends (friend_email, password, profile_name, date_started, num_of_friends)
-                                            VALUES ('john.doe@gmail.com', 'password123', 'John', '2025-01-01', 5),
-                                            ('jane.smith@gmail.com', 'securepass', 'Jane', '2025-02-01', 8),
-                                            ('alice.jones@gmail.com', 'alice123', 'Alice', '2025-03-01', 3),
-                                            ('bob.brown@gmail.com', 'bobsecure', 'Bob', '2025-04-01', 7),
-                                            ('charlie.white@gmail.com', 'charliepass', 'Charlie', '2025-05-01', 6),
-                                            ('david.green@gmail.com', 'david123', 'David', '2025-06-01', 4),
-                                            ('emma.black@gmail.com', 'emmapass', 'Emma', '2025-07-01', 9),
-                                            ('frank.gray@gmail.com', 'franksecure', 'Frank', '2025-08-01', 2),
-                                            ('grace.blue@gmail.com', 'grace123', 'Grace', '2025-09-01', 10),
-                                            ('hannah.red@gmail.com', 'hannahpass', 'Hannah', '2025-10-01', 1);
-                                        ";
-                                            } elseif ($table == 'myfriends') {
+                                                VALUES ('john.doe@gmail.com', 'password123', 'John', '2025-01-01', 5),
+                                                ('jane.smith@gmail.com', 'securepass', 'Jane', '2025-02-01', 8),
+                                                ('alice.jones@gmail.com', 'alice123', 'Alice', '2025-03-01', 3),
+                                                ('bob.brown@gmail.com', 'bobsecure', 'Bob', '2025-04-01', 7),
+                                                ('charlie.white@gmail.com', 'charliepass', 'Charlie', '2025-05-01', 6),
+                                                ('david.green@gmail.com', 'david123', 'David', '2025-06-01', 4),
+                                                ('emma.black@gmail.com', 'emmapass', 'Emma', '2025-07-01', 9),
+                                                ('frank.gray@gmail.com', 'franksecure', 'Frank', '2025-08-01', 2),
+                                                ('grace.blue@gmail.com', 'grace123', 'Grace', '2025-09-01', 10),
+                                                ('hannah.red@gmail.com', 'hannahpass', 'Hannah', '2025-10-01', 1);";
+                                            }
+                                            // Create the myfriends table with dummy data
+                                            elseif ($table == 'myfriends') {
                                                 $create_query = "CREATE TABLE IF NOT EXISTS `myfriends` (
-                                            friend_id1 INT NOT NULL,
-                                            friend_id2 INT NOT NULL,
-                                            CONSTRAINT PK_MyFriends PRIMARY KEY (friend_id1, friend_id2),
-                                            CONSTRAINT FK_MyFriends_Friend1 FOREIGN KEY (friend_id1) REFERENCES friends(friend_id),
-                                            CONSTRAINT FK_MyFriends_Friend2 FOREIGN KEY (friend_id2) REFERENCES friends(friend_id)
-                                        )";
+                                                friend_id1 INT NOT NULL,
+                                                friend_id2 INT NOT NULL,
+                                                CONSTRAINT PK_MyFriends PRIMARY KEY (friend_id1, friend_id2),
+                                                CONSTRAINT FK_MyFriends_Friend1 FOREIGN KEY (friend_id1) REFERENCES friends(friend_id),
+                                                CONSTRAINT FK_MyFriends_Friend2 FOREIGN KEY (friend_id2) REFERENCES friends(friend_id))";
+
                                                 $data_query = "INSERT INTO myfriends (friend_id1, friend_id2)
-                                            VALUES (1, 2), (1, 3), (1, 4), (2, 5), (2, 6), (3, 7), (3, 8), (4, 9), (4, 10), (5, 1),
-                                            (6, 2), (7, 3), (8, 4), (9, 5), (10, 6), (1, 7), (2, 8), (3, 9), (4, 5), (5, 2);";
+                                                VALUES (1, 2), (1, 3), (1, 4), (2, 1), (2, 3),
+                                                (2, 5), (3, 1), (3, 2), (3, 4), (3, 5),
+                                                (4, 1), (4, 3), (4, 5), (4, 6), (5, 2),
+                                                (5, 3), (5, 4), (5, 6), (6, 4), (6, 5);";
                                             }
 
                                             // Execute the create table query
