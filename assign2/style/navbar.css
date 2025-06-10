@@ -90,3 +90,12 @@
     font-family: 'Arial Black', Arial, sans-serif;
     vertical-align: middle;
 }
+
+.user-name {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    font-weight: 500;
+    margin-right: 8px;
+    font-weight: bold;
+}
