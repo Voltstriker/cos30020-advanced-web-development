@@ -38,6 +38,10 @@ body {
     flex: 0 0 auto;
 }
 
+.banner h1, .banner h2, .banner h3, .banner h4, .banner h5, .banner h6 {
+    color: #fff;
+}
+
 .banner a, .banner a:visited, .banner a:active {
     color: #ffd600;
     text-decoration: underline;
@@ -61,7 +65,8 @@ body {
     flex-direction: row;
     width: 100%;
     height: 100%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 25px 15px;
     margin: 5px 0;
+    border: #e53935 1px solid;
+    border-radius: 4px;
 }

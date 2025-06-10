@@ -6,7 +6,7 @@
     font-weight: bold;
     margin-bottom: 10px;
     font-size: 1.2em;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    color: #e53935;
 }
 
 .form-group > .form-text {
@@ -23,4 +23,12 @@
     font-weight: bold;
     margin-bottom: 5px;
     font-size: 1em;
+}
+
+input {
+    padding: 5px;
+    border: 1px solid #e53935;;
+    border-radius: 4px;
+    font-size: 1em;
+    width: 100%;
 }
