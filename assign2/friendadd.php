@@ -47,7 +47,7 @@ if (!@mysqli_select_db($db_connection, $database)) {
                     <nav class="col-12 nav">
                         <div class="brand brand-logo">
                             <img src="images/Razor.png" alt="RazorBook Logo" class="brand-image" />
-                            <span class="brand-title">RazorBook</span>
+                            <a class="brand-title" href="index.php">RazorBook</a>
                         </div>
                         <ul class="nav-pills">
                             <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
