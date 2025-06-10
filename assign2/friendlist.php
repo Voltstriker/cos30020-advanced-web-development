@@ -116,7 +116,7 @@ if (!@mysqli_select_db($db_connection, $database)) {
                                         echo '<p>You have <span class="text-bold">' . mysqli_num_rows($result) . '</span> friend(s).</p>';
 
                                         while ($row = mysqli_fetch_assoc($result)) {
-                                            $query = "SELECT profile_name FROM friends WHERE friend_id = " . $row['friend_id2'];
+                                            $query = "SELECT profile_name FROM friends WHERE friend_id = " . $row['friend_id2'] . " ORDER BY profile_name";
                                             $friend_result = mysqli_fetch_assoc(mysqli_query($db_connection, $query));
                                             $friend_name = htmlspecialchars($friend_result['profile_name']);
                                             $friend_id2 = urlencode($row['friend_id2']);

@@ -150,7 +150,7 @@ if (!@mysqli_select_db($db_connection, $database)) {
                                             echo '</tr>';
                                         }
                                     } else {
-                                        echo '<td>You are friends with all registered users - you are a social butterfly!';
+                                        echo '<td colspan="2">You are friends with all registered users - you are a social butterfly!';
                                     }
                                     echo '</tbody>';
                                     echo '</table>';
