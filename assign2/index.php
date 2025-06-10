@@ -114,7 +114,7 @@ require_once 'config.inc.php';
                                         // Create the missing tables
                                         foreach ($missing_tables as $table) {
                                             if ($table == 'friends') {
-                                                $create_query = "CREATE TABLE friends (
+                                                $create_query = "CREATE TABLE IF NOT EXISTS `friends` (
                                             `friend_id` INT NOT NULL AUTO_INCREMENT,
                                             `friend_email` VARCHAR(50) NOT NULL,
                                             `password` VARCHAR(20) NOT NULL,
@@ -137,7 +137,7 @@ require_once 'config.inc.php';
                                             ('hannah.red@example.com', 'hannahpass', 'Hannah Red', '2025-10-01', 1);
                                         ";
                                             } elseif ($table == 'myfriends') {
-                                                $create_query = "CREATE TABLE myfriends (
+                                                $create_query = "CREATE TABLE IF NOT EXISTS `myfriends` (
                                             friend_id1 INT NOT NULL,
                                             friend_id2 INT NOT NULL,
                                             CONSTRAINT PK_MyFriends PRIMARY KEY (friend_id1, friend_id2),
