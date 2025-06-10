@@ -154,7 +154,7 @@ if (!@mysqli_select_db($db_connection, $database)) {
 
                                         // Display the potential friends in a table
                                         echo '<table id="friend-table">';
-                                        echo '<thead><tr><th>Friend Name</th>' . '<th>Action</th>' . '</tr></thead>';
+                                        echo '<thead><tr><th>Friend Name</th><th>Mutual Friends</th><th>Action</th></tr></thead>';
                                         echo '<tbody>';
 
                                         // Check if the query was successful and if there are any potential friends
@@ -163,14 +163,30 @@ if (!@mysqli_select_db($db_connection, $database)) {
                                             // Loop through the results and display each potential friend
                                             while ($row = mysqli_fetch_assoc($result)) {
                                                 $friend_name = htmlspecialchars($row['profile_name']);
-                                                $friend_id = urlencode($row['friend_id']);
+                                                $friend_id = (int)$row['friend_id'];
+
+                                                // Calculate mutual friends
+                                                $mutual_query = "
+                                                    SELECT COUNT(*) AS mutual_count
+                                                    FROM myfriends mf1
+                                                    INNER JOIN myfriends mf2 ON mf1.friend_id2 = mf2.friend_id2
+                                                    WHERE mf1.friend_id1 = ? AND mf2.friend_id1 = ?
+                                                ";
+                                                $mutual_stmt = mysqli_prepare($db_connection, $mutual_query);
+                                                mysqli_stmt_bind_param($mutual_stmt, "ii", $profile_id, $friend_id);
+                                                mysqli_stmt_execute($mutual_stmt);
+                                                mysqli_stmt_bind_result($mutual_stmt, $mutual_count);
+                                                mysqli_stmt_fetch($mutual_stmt);
+                                                mysqli_stmt_close($mutual_stmt);
+
                                                 echo '<tr>';
                                                 echo '<td>' . $friend_name . '</td>';
-                                                echo '<td><a class="btn btn-primary" href="functions/addfriend.php?friend_id=' . $friend_id . '">Add Friend</a></td>';
+                                                echo '<td>' . $mutual_count . '</td>';
+                                                echo '<td><a class="btn btn-primary" href="functions/addfriend.php?friend_id=' . urlencode($friend_id) . '">Add Friend</a></td>';
                                                 echo '</tr>';
                                             }
                                         } else {
-                                            echo '<td colspan="2">You are friends with all registered users - you are a social butterfly!';
+                                            echo '<td colspan="3">You are friends with all registered users - you are a social butterfly!';
                                         }
                                         echo '</tbody>';
                                         echo '</table>';
